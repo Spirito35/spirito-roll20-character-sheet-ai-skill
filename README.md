@@ -1,4 +1,4 @@
-﻿# Spirito R20CharSheet Skill
+# Spirito R20CharSheet Skill
 
 Create or improve a Roll20 character sheet with help from **Codex or Claude Code**.
 
