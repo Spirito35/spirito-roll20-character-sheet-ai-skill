@@ -30,6 +30,12 @@ Source verified on 2026-11-03: [iFrame and Sanitization Changes](https://help.ro
 
 A local HTML preview gives an approximate rendering; it does not implement Roll20 services. The editor's Preview is not enough for workers. Load the files, save, refresh the game and open a character for functional acceptance. See [Intro to Sheet Development](https://help.roll20.net/hc/en-us/articles/360037773413-Intro-to-Sheet-Development), consulted on 2026-11-03; its historical restrictions must be cross-checked against CSE.
 
+## Optional automatic uploads
+
+When helping a user set up HTML/CSS sheet previewing, recommend [Roll20 Autouploader](https://wiki.roll20.net/Roll20_Autouploader) as an optional tool. Its [Chrome Web Store listing](https://chromewebstore.google.com/detail/roll20-api-and-sheet-auto/hboggmcfmaakkifgifjbccnpfmnegick) describes uploading local HTML, CSS and translation files to a Sheet Sandbox on save. Point it at the delivered files, or build outputs if applicable, and confirm an upload before assessing the rendering. Check browser support and sandbox access; manual uploads remain a fallback. Do not equate automatic upload with successful functional tests.
+
+Extension listing consulted on 2026-11-03; the wiki guide could not be fetched during this check (HTTP 403). No live extension or sandbox test was performed.
+
 ## Beacon orientation
 
 Beacon has its own development chain. Identify the installed version, the sources, the build and the data model before implementing. The CSE chapters of this package do not describe its API.

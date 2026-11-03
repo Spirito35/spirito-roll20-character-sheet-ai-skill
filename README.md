@@ -119,6 +119,21 @@ The name and description also allow automatic selection depending on the environ
 
 By default, the skill introduces no comments, non-ASCII characters or emojis into delivered CSS, including roll-template styles and escaped emojis. This is a delivery convention based on Spirito's experience, not a universal Roll20 restriction. Explicit project instructions and documented exceptions take precedence; existing sheets are not automatically cleaned up. See the [full convention and checks](roll20-sheets/references/css-assets.md#delivered-css-convention).
 
+## Preview changes in Roll20
+
+For a faster edit-and-preview workflow, we recommend installing the optional **Roll20 API and Sheet Autouploader** browser extension. It uploads your HTML, CSS and translation files to a Roll20 Sheet Sandbox as you save changes, reducing manual uploads so you can inspect the actual sheet rendering while you work.
+
+- [Roll20 Autouploader guide](https://wiki.roll20.net/Roll20_Autouploader)
+- [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/roll20-api-and-sheet-auto/hboggmcfmaakkifgifjbccnpfmnegick)
+
+With access to a Roll20 Sheet Sandbox:
+
+1. Install the extension in a supported Chromium browser.
+2. Open your Sheet Sandbox and select the local sheet directory for the extension to monitor. If your project has a build step, select the generated output directory.
+3. Save a change, check that the upload completes, then inspect a character sheet in the sandbox. Refresh or reopen it if needed.
+
+The extension's listing notes browser compatibility limitations, including Brave; check the linked instructions for your browser. The extension is optional: manual uploads remain possible. Seeing the updated layout does not replace testing rolls, workers and character data.
+
 ## Scope and limits
 
 V1 mainly covers CSE HTML/CSS creation and maintenance, plus Legacy particularities. It covers the usual decisions around data, workers, repeating sections, CSS, rolls, templates, resources, import/export, translation and validation. Beacon, Charactermancer and Mod/API have dedicated orientation and sources; they are not treated as equivalent to the CSE architecture.
