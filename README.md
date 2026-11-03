@@ -9,7 +9,7 @@ Working version: 2026-11-03. Language of the instructions: English. The same ski
 - [check_sheet.py](roll20-sheets/scripts/check_sheet.py): read-only static checker, Python 3.10+.
 - [Source catalog](roll20-sheets/references/sources.md): official links, consultation date and coverage limits.
 
-The package works without Spirito's sheets, backups or paths. Examples are short and adaptable; personal conventions and observations stay out of this public folder. It is not affiliated with Roll20 and does not reproduce a complete official manual.
+The package works without Spirito's sheets, backups or paths. Examples are short and adaptable; project-specific details stay outside this public folder. Shared delivery conventions are identified explicitly. It is not affiliated with Roll20 and does not reproduce a complete official manual.
 
 ## Installing in a project
 
@@ -117,7 +117,7 @@ inventory row in the indicated files.
 
 The name and description also allow automatic selection depending on the environment. If the skill does not appear, check the destination and the reloading of skills in the version of the tool in use.
 
-To apply a project-specific convention, provide it in the project's usual instructions. Example: "For this project, do not add comments or non-ASCII characters to the delivered CSS; preserve explicitly documented exceptions." This preference is not imposed on the public.
+By default, the skill introduces no comments, non-ASCII characters or emojis into delivered CSS, including roll-template styles and escaped emojis. This is a delivery convention based on Spirito's experience, not a universal Roll20 restriction. Explicit project instructions and documented exceptions take precedence; existing sheets are not automatically cleaned up. See the [full convention and checks](roll20-sheets/references/css-assets.md#delivered-css-convention).
 
 ## Scope and limits
 

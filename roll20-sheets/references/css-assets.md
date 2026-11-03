@@ -46,15 +46,25 @@ Declare the variables needed in the roll template; they do not inherit from the 
 - Ligature showing "settings" instead of an icon: examine the font request, family, ligatures, case and spacing. Add an accessible name to the button.
 - Repeating controls are generated: inspect `.repcontrol`/`.itemcontrol` and the edit mode before restyling them.
 
-## Optional conventions
+## Delivered CSS convention
 
-CSS without comments, non-ASCII characters or emojis is a possible project choice, not a universal Roll20 rule. Apply a convention only when explicitly requested, keeping its documented exceptions. Do not delete a license comment or a URL with a global regex.
+By default, do not introduce comments, non-ASCII characters or emojis into delivered CSS, including roll-template styles. Do not hide emojis behind Unicode escapes. Keep explanations in Markdown files; prefer ASCII ligature names or images for icons, and put translated text in HTML.
+
+This is the skill's delivery convention, drawn from loading incidents reported by Spirito, not a universal Roll20 restriction. Explicit project instructions and documented exceptions take precedence. Preserve existing exceptions within their stated scope; do not extend them to other sheets or new occurrences without instruction. Historical occurrences do not authorize a cleanup of the whole sheet.
+
+Textual check, adapted to the delivered file:
+
+```powershell
+rg -n -e '/\*' -e '\*/' -e '[^\x09\x0A\x0D\x20-\x7E]' 'path/sheet.css'
+```
+
+This check does not detect every escaped emoji. Inspect CSS escapes as well as matches, and compare changes against the existing file and documented exceptions. Do not blindly remove strings, URLs, attributions or required license notices; preserve required notices and document any necessary exception.
 
 ## Targeted checks
 
 - Sheet and chat, embedded and detached window, intended themes.
 - Long names, many repeating rows, edit/delete buttons.
 - Visible focus, non-blocking overlays, unavailable assets.
-- If a strict CSS policy applies: textual inspection of the delivered files, including template styles; an empty result does not certify VTT compatibility.
+- Check delivered CSS, including template styles, against the convention and project exceptions above. An empty textual check does not certify VTT compatibility.
 
 CSE framework verified on 2026-11-03: [sanitization](https://help.roll20.net/hc/en-us/articles/360061735034-iFrame-and-Sanitization-Changes). The grid, gauge and width choices are recommendations drawn from work on the local sheets.

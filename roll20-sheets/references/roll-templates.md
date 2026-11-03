@@ -2,6 +2,8 @@
 
 Read for chat cards, helpers, criticals or result theming.
 
+For template styles, apply the [delivered CSS convention](css-assets.md#delivered-css-convention), including its checks and project exceptions.
+
 ## Name contract
 
 ```text

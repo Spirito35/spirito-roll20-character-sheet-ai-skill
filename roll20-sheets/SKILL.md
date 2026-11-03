@@ -48,7 +48,7 @@ All paths are relative to this skill's folder. A row says when to read a file, n
 - A worker is neither a web page script nor a campaign Mod/API script. Do not invent native functions or DOM capabilities.
 - A display option is not a permission; a value shown in chat is not a change to the pools.
 - Distinguish documented rule, design recommendation and project convention. The number of sheets using a technique proves neither its validity nor a platform limit.
-- Apply local conventions and their explicit exceptions. The "ASCII only" or "no comments" CSS rules are not imposed by this public skill.
+- Delivered CSS: by default, introduce no comments, non-ASCII characters or emojis, including escaped emojis and roll-template styles. Follow the [CSS convention and checks](references/css-assets.md#delivered-css-convention); preserve explicit project exceptions and avoid unrelated cleanup.
 
 ## Modifying and verifying
 
