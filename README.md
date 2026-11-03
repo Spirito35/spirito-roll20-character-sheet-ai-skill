@@ -46,26 +46,26 @@ These paths are a convention, not a requirement. If your files are elsewhere, te
 ### With a rulebook
 
 1. Put the relevant PDF, Markdown or text files in `docs/rulebooks/`. Keep books you cannot redistribute out of the public repository and release archives; add `/docs/rulebooks/` to your project's `.gitignore` before committing them. This does not untrack files already committed.
-2. In `docs/sheet-brief.md`, name the game, edition, source filenames, relevant chapters or pages, errata and house rules. List the features you want for the first version.
-3. Ask the agent to consult only the sections needed for those features. It should record page or section references for implemented mechanics. If a PDF cannot be read with the available tools, provide a readable excerpt or text export; the agent must flag the gap.
+2. Ask the agent to start your sheet. When it finds a relevant rulebook, it creates and fills in `docs/sheet-brief.md` itself: game, edition, source filenames, relevant chapters or pages, mechanics and proposed first-version features. You do not need to fill out the template first.
+3. The agent asks you about choices the book cannot settle, such as feature priorities, layout and house rules. It reads only the sections needed for the task and records page or section references. If a PDF cannot be read with the available tools, provide a readable excerpt or text export; the agent must flag the gap.
 
 Example request after activating the skill:
 
 ```text
-Create a Roll20 sheet using docs/sheet-brief.md.
-The rulebook is docs/rulebooks/core-rules.pdf; use the edition
-listed in the brief. Start with attributes, skill rolls and health.
+Create a Roll20 sheet from docs/rulebooks/core-rules.pdf.
+Create and fill in docs/sheet-brief.md from the rulebook yourself.
+Start with attributes, skill rolls and health.
 Read only the relevant sections, cite their pages or headings,
 and ask about unresolved rules before automating them.
 ```
 
 ### Without a rulebook
 
-Create `docs/sheet-brief.md` with your feature list in plain language. A chat message is also enough to get started; the agent can help turn it into a brief. You do not need to know HTML, CSS or the final formulas yet.
+Describe your feature list in plain language in chat; the agent creates and fills in `docs/sheet-brief.md` from it. You can also write the brief yourself if you prefer. You do not need to know HTML, CSS or the final formulas yet.
 
 For each feature, say what users enter, what the sheet calculates, which buttons they need and what results they expect. Mark unknown rules as undecided. The agent can build agreed parts and ask focused questions about missing mechanics; it should not silently invent a game's rules.
 
-Use this starter for either route:
+The agent can use this starter for either route, or you can fill it in yourself:
 
 ```markdown
 # Sheet brief
@@ -93,8 +93,9 @@ Use this starter for either route:
 Replace the example rows with your own rules. With no rulebook, an example request is:
 
 ```text
-Create a Roll20 sheet from docs/sheet-brief.md. I have no rulebook.
-Help me refine the feature list and ask about missing formulas.
+Create a Roll20 sheet. I have no rulebook. I want skill rolls,
+manual health tracking and an inventory with a weight total.
+Write docs/sheet-brief.md from this list and ask about missing formulas.
 Keep undecided mechanics manual until we settle their behavior.
 ```
 
@@ -133,3 +134,19 @@ After a real failure, add the scenario to the regression checklist and then fix 
 The [evaluation protocol](EVALUATION.md) provides five representative requests and their success criteria for comparing the two agents.
 
 When editing the references, keep the sources and the evidence qualifications. Do not turn a recommendation into "mandatory" without a platform or project justification.
+
+## About Spirito
+
+I'm [Spirito](https://www.spirito.fr), a graphic designer and tabletop role-playing character sheet creator. I have coded more than a dozen sheets myself, and this project grew out of that work.
+
+The sheet code used to develop this skill came exclusively from my own creations. I chose not to use other authors' sheet code from the Roll20 community repository because I had not obtained their agreement to use their work for this project. The skill also draws on the platform documentation linked in its source catalog; links to repository guidance are documentation references, not a corpus of other creators' sheets.
+
+This is a set of instructions and references for existing AI assistants, not an AI model trained exclusively on my sheets. The provenance described here concerns this skill, not the training data of the models that use it.
+
+## Support my work
+
+Like many creatives, my work has been affected by the arrival of AI. It's here, and we have to find a way to work with it. Sharing this skill is one way I'm putting my experience to use.
+
+If this project helps you and you'd like to say thanks, you can [make a voluntary donation through PayPal](https://www.paypal.com/paypalme/spirito35). Donations support my work as a designer and sheet creator; they are not required to use the skill.
+
+You can also find me and my work at [www.spirito.fr](https://www.spirito.fr).
