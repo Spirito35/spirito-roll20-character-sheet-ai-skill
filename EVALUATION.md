@@ -1,49 +1,49 @@
-# Évaluer le skill sur de vraies tâches
+# Evaluating the skill on real tasks
 
-Ce protocole permet de comparer Codex et Claude Code, avec puis sans le skill, sur une copie des mêmes fichiers. Il n'affirme pas que ces sessions ont déjà été exécutées.
+This protocol compares Codex and Claude Code, with and then without the skill, on a copy of the same files. It does not claim that these sessions have already been run.
 
-Utiliser le même modèle, la même demande et les mêmes fichiers au départ. Conserver les versions et le journal des fichiers lus. Examiner le résultat et les essais réellement exécutés ; un changement de style de réponse n'est pas une mesure d'efficacité.
+Use the same model, the same request and the same starting files. Keep the versions and the log of files read. Examine the result and the tests actually run; a change in response style is not a measure of effectiveness.
 
-## Cas 1 — CSS ciblé
+## Case 1 — Targeted CSS
 
-Demande : « Le nom d'une arme déborde de sa colonne quand il est long. Corrige la mise en page de cette section. »
+Request: "A weapon's name overflows its column when it is long. Fix the layout of this section."
 
-Attendu : identification des sélecteurs concernés, correction de leur contrainte de largeur, contrôle des autres champs de la ligne. Aucune migration des attributs ou réécriture des jets sans dépendance démontrée. La lecture de toutes les références publication/import n'est pas utile.
+Expected: identification of the selectors involved, a fix to their width constraint, a check of the other fields in the row. No attribute migration or roll rewrite without a demonstrated dependency. Reading all the publishing/import references is not useful.
 
-## Cas 2 — Agrégat de repeating
+## Case 2 — Repeating aggregate
 
-Demande : « Le total de poids reste incorrect après suppression de la dernière ligne. Corrige ce comportement. »
+Request: "The weight total stays wrong after deleting the last row. Fix this behavior."
 
-Attendu : examen de l'abonnement à suppression et de la branche collection vide ; total neutre après dernière suppression ; propagation vers les sorties dépendantes. Les règles de quantité propres au jeu restent préservées. Un audit de tout le CSS n'est pas nécessaire.
+Expected: examination of the deletion subscription and the empty-collection branch; a neutral total after the last deletion; propagation to dependent outputs. Game-specific quantity rules are preserved. An audit of all the CSS is not necessary.
 
-## Cas 3 — Import qui efface trop tôt
+## Case 3 — Import that wipes too early
 
-Demande : « Un JSON syntaxiquement correct mais incomplet vide l'inventaire. Corrige l'import en conservant son mode de remplacement. »
+Request: "A syntactically valid but incomplete JSON empties the inventory. Fix the import while keeping its replace mode."
 
-Attendu : validation du contenu avant mutation, périmètre de remplacement conservé, anciennes données préservées en cas de rejet, contrôle des relations entre lignes et de l'import répété. Ne pas résoudre le problème en supprimant silencieusement la fonction de remplacement.
+Expected: validation of the content before mutation, replacement scope kept, old data preserved if the input is rejected, checks of the relations between rows and of repeated imports. Do not solve the problem by silently removing the replace feature.
 
-## Cas 4 — Création minimale
+## Case 4 — Minimal creation
 
-Demande : « Crée une fiche CSE avec Force, PV actuels/max, inventaire quantité/poids et un jet d20 + Force. »
+Request: "Create a CSE sheet with Strength, current/max HP, inventory quantity/weight and a d20 + Strength roll."
 
-Attendu : livrables HTML/CSS adaptés à Roll20, attributs cohérents, total d'inventaire maintenu après suppression, réserve à zéro conservée à la réouverture, jet natif. Éviter un framework, Charactermancer ou une dépendance API sans besoin.
+Expected: HTML/CSS deliverables suited to Roll20, consistent attributes, inventory total maintained after deletion, a zero pool preserved on reopening, a native roll. Avoid a framework, Charactermancer or an API dependency without a need.
 
-## Cas 5 — Piège de compatibilité
+## Case 5 — Compatibility trap
 
-Demande : « Cette fiche est Beacon et utilise déjà son SDK. Ajoute une action au bon endroit. »
+Request: "This sheet is Beacon and already uses its SDK. Add an action in the right place."
 
-Attendu : repérage du SDK/version, consultation de sa documentation et de l'architecture existante. Aucun collage de `script type="text/worker"` présenté comme solution Beacon.
+Expected: identification of the SDK/version, consultation of its documentation and of the existing architecture. No pasting of `script type="text/worker"` presented as a Beacon solution.
 
-## Relever les résultats
+## Recording the results
 
-| Mesure | À consigner |
+| Measure | What to record |
 | --- | --- |
-| Correction | Scénario initial résolu ; sorties attendues |
-| Régression | Données, consommateurs et cas voisins conservés |
-| Sources | Contrat vérifié lorsque nécessaire, incertitudes explicites |
-| Lectures | Fichiers et passages réellement chargés, y compris code de fiche |
-| Coût | Tokens mesurés par l'outil si disponibles ; sinon caractères lus, clairement étiquetés |
-| Temps | Durée de la session et intervention humaine nécessaire |
-| Limites | Contrôles locaux vs tests VTT, dépendances absentes |
+| Correctness | Initial scenario resolved; expected outputs |
+| Regression | Data, consumers and neighboring cases preserved |
+| Sources | Contract verified when necessary, uncertainties explicit |
+| Reads | Files and passages actually loaded, including sheet code |
+| Cost | Tokens measured by the tool if available; otherwise characters read, clearly labeled |
+| Time | Session duration and human intervention needed |
+| Limits | Local checks vs VTT tests, missing dependencies |
 
-Un chargement court qui manque une dépendance importante n'est pas une réussite. Pour un résultat durable, rejouer les scénarios après chaque changement substantiel du skill et corriger uniquement les instructions responsables d'un échec observé.
+A short load that misses an important dependency is not a success. For a lasting result, replay the scenarios after each substantial change to the skill, and fix only the instructions responsible for an observed failure.

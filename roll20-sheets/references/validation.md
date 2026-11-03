@@ -1,68 +1,68 @@
-# Vérification proportionnée à la modification
+# Verification proportionate to the change
 
-Lire à la préparation des contrôles ou avant livraison. Un audit complet explicite couvre tous les domaines applicables ; un correctif courant couvre son périmètre et les dépendances touchées.
+Read when preparing checks or before delivery. An explicit full audit covers all applicable domains; a routine fix covers its scope and the dependencies touched.
 
-## Socle commun
+## Common baseline
 
-- [ ] Fichiers actifs et mode identifiés ; état récupérable disponible si nécessaire.
-- [ ] Comportement attendu décrit avec un exemple d'entrée/sortie.
-- [ ] Attributs et consommateurs concernés examinés ; anciennes données préservées.
-- [ ] Contrôles locaux pertinents exécutés et résultats examinés.
-- [ ] Scénario de la modification et cas voisins essayés dans Roll20, ou explicitement signalés comme restant à faire.
-- [ ] Bilan exact : changements, vérifications, limites.
+- [ ] Active files and mode identified; recoverable state available if needed.
+- [ ] Expected behavior described with an input/output example.
+- [ ] Attributes and consumers involved examined; old data preserved.
+- [ ] Relevant local checks run and results examined.
+- [ ] The change's scenario and neighboring cases tried in Roll20, or explicitly flagged as still to do.
+- [ ] Exact summary: changes, verifications, limits.
 
-## Choisir la recette
+## Choosing the checklist
 
-| Modification | Scénarios utiles |
+| Change | Useful scenarios |
 | --- | --- |
-| Saisie/calcul | Vide, zéro, négatif, limite, nouveau/ancien personnage |
-| Repeating | Ajout, édition, ordre, suppression, dernière ligne |
-| Bonus/dépendances | Ajouter puis retirer une source, changer choix et valeur |
-| Réserve/coût | Max zéro, hausse/baisse, insuffisance, double clic |
-| Jet/template | Normal, avantage, désavantage, égalité, critique, propriété absente |
-| Confidentialité | Auteur, MJ et autre joueur ; préfixe réel |
-| Interface/CSS | Fenêtre intégrée/détachée, largeur, zoom, clavier, thèmes |
-| Traduction | Clés statiques/dynamiques, deux langues si prévues |
-| Migration/import | Ancien/incomplet, répétition, données invalides sans mutation |
-| Intégration | Dépendance absente, mauvais type d'entrée, permissions |
-| Impression | Fiche courte/longue, onglets et notes inclus |
-| Publication | Manifeste, aperçu, fichiers, exigences actuelles |
+| Input/calculation | Empty, zero, negative, limit, new/old character |
+| Repeating | Add, edit, order, delete, last row |
+| Bonuses/dependencies | Add then remove a source, change choice and value |
+| Pool/cost | Zero max, increase/decrease, insufficient, double click |
+| Roll/template | Normal, advantage, disadvantage, tie, critical, absent property |
+| Privacy | Author, GM and another player; real prefix |
+| Interface/CSS | Embedded/detached window, width, zoom, keyboard, themes |
+| Translation | Static/dynamic keys, two languages if planned |
+| Migration/import | Old/incomplete, repetition, invalid data without mutation |
+| Integration | Absent dependency, wrong input type, permissions |
+| Printing | Short/long sheet, tabs and notes included |
+| Publishing | Manifest, preview, files, current requirements |
 
-Ne pas cocher les essais non exécutés. Utiliser `validé localement`, `validé dans Roll20`, `non applicable` avec raison ou `à tester`. Les checklists des références précisent les invariants du sujet ; inutile de les recopier dans un rapport de plusieurs pages pour une petite correction.
+Do not tick tests that were not run. Use `validated locally`, `validated in Roll20`, `not applicable` with a reason, or `to test`. The references' checklists spell out the topic's invariants; there is no need to copy them into a multi-page report for a small fix.
 
-## Vérificateur facultatif
+## Optional checker
 
-Depuis le dossier du skill, Python 3.10+ :
-
-```text
-python scripts/check_sheet.py --html /chemin/fiche.html --css /chemin/fiche.css
-python scripts/check_sheet.py --sheet-json /chemin/sheet.json --translation /chemin/translation.json
-```
-
-Un `sheet.json` fournit ses chemins HTML/CSS lorsqu'ils ne sont pas passés explicitement. Les chemins relatifs du manifeste sont résolus depuis son dossier. Le script lit les fichiers ; il ne modifie rien et n'exécute aucun worker.
-
-Contrôles : UTF-8, JSON strict, type de `legacy`, fichiers déclarés, structure HTML dangereuse, nombre de blocs workers, IDs dupliqués/historiques, liaisons élémentaires, clés i18n statiques et correspondance des noms de templates littéraux. Les warnings nécessitent examen, pas suppression automatique.
-
-Options `--css-ascii` et `--css-no-comments` uniquement si le projet adopte ces conventions. Elles détectent des indices textuels, pas un langage CSS complet ni tous les emojis encodés. Aucune option n'autorise une suppression automatique.
-
-Code de sortie : 0 sans erreur bloquante détectée (warnings possibles), 1 erreurs détectées, 2 usage incorrect. Utiliser `--json` pour un résultat structuré. Ces codes ne certifient jamais le rendu, les événements ou les règles métier dans Roll20.
-
-## Autres vérifications
-
-Un parseur JS peut vérifier la syntaxe du bloc worker extrait ; compter les accolades ne suffit pas. Un linter HTML généraliste peut méconnaître `type="roll"`, `type="action"` et `rolltemplate` : adapter l'outil avant d'appliquer ses corrections.
-
-Sous PowerShell, lire les fichiers avec `Get-Content -Encoding UTF8`. Rechercher des fonctions/attributs stables plutôt que des numéros de ligne mémorisés. Un test local simulant `getAttrs` ne valide pas la plateforme réelle.
-
-## Consigner un problème utile
+From the skill folder, Python 3.10+:
 
 ```text
-Date / fiche / version :
-Fichiers et mode réellement chargés :
-Scénario et valeurs initiales :
-Attendu / observé :
-Cause et repère de code :
-Correctif / essais exécutés :
-Statut : hypothèse, confirmé dans le code, confirmé dans Roll20
+python scripts/check_sheet.py --html /path/sheet.html --css /path/sheet.css
+python scripts/check_sheet.py --sheet-json /path/sheet.json --translation /path/translation.json
 ```
 
-Garder l'historique propre au projet hors des instructions communes. Ajouter au skill une leçon courte seulement si elle aide une prochaine tâche ; ne pas accumuler tous les anciens incidents dans l'entrée principale.
+A `sheet.json` supplies its HTML/CSS paths when they are not passed explicitly. The manifest's relative paths are resolved from its folder. The script reads the files; it modifies nothing and executes no worker.
+
+Checks: UTF-8, strict JSON, type of `legacy`, declared files, dangerous HTML structure, number of worker blocks, duplicated/historical IDs, basic bindings, static i18n keys and matching of literal template names. Warnings require examination, not automatic removal.
+
+Options `--css-ascii` and `--css-no-comments` only if the project adopts these conventions. They detect textual hints, not a complete CSS language nor all encoded emojis. No option authorizes automatic removal.
+
+Exit code: 0 no blocking error detected (warnings possible), 1 errors detected, 2 incorrect usage. Use `--json` for a structured result. These codes never certify rendering, events or game rules in Roll20.
+
+## Other checks
+
+A JS parser can check the syntax of the extracted worker block; counting braces is not enough. A general-purpose HTML linter may not recognize `type="roll"`, `type="action"` and `rolltemplate`: adapt the tool before applying its fixes.
+
+In PowerShell, read files with `Get-Content -Encoding UTF8`. Search for stable functions/attributes rather than memorized line numbers. A local test simulating `getAttrs` does not validate the real platform.
+
+## Recording a useful problem
+
+```text
+Date / sheet / version:
+Files and mode actually loaded:
+Scenario and initial values:
+Expected / observed:
+Cause and code reference:
+Fix / tests run:
+Status: hypothesis, confirmed in the code, confirmed in Roll20
+```
+
+Keep project-specific history out of the common instructions. Add a short lesson to the skill only if it helps a future task; do not accumulate all past incidents in the main entry point.

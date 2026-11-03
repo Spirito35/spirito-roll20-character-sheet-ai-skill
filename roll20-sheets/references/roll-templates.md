@@ -1,8 +1,8 @@
 # Roll templates
 
-Lire pour cartes de chat, helpers, critiques ou thème de résultat.
+Read for chat cards, helpers, criticals or result theming.
 
-## Contrat des noms
+## Name contract
 
 ```text
 &{template:demo}
@@ -10,44 +10,44 @@ Lire pour cartes de chat, helpers, critiques ou thème de résultat.
 .sheet-rolltemplate-demo { ... }
 ```
 
-Faire correspondre les trois noms. Employer des guillemets doubles dans les attributs HTML des templates. Conserver leur préfixage `sheet-` et leurs contraintes Legacy même si la fiche est CSE. Le chat ne descend pas de la racine `.charsheet` : palette et styles nécessaires doivent y être définis.
+Make the three names match. Use double quotes in the templates' HTML attributes. Keep their `sheet-` prefixing and their Legacy constraints even if the sheet is CSE. The chat does not descend from the `.charsheet` root: the palette and styles needed must be defined there.
 
 ## Helpers
 
-| Forme | Sens |
+| Form | Meaning |
 | --- | --- |
-| `{{#description}}...{{/description}}` | Propriété présente / exploitable comme condition |
-| `{{^description}}...{{/description}}` | Branche d'absence |
-| `{{#rollTotal() jet 10}}...{{/rollTotal() jet 10}}` | Total égal |
-| `rollGreater()` / `rollLess()` | Comparaison stricte |
-| `rollBetween()` | Intervalle inclusif |
-| `rollWasCrit()` / `rollWasFumble()` | Marqueurs de critique/échec du jet |
-| `{{#allprops() name attaque}}...{{/allprops() name attaque}}` | Propriétés restantes, en excluant `name` et `attaque` |
+| `{{#description}}...{{/description}}` | Property present / usable as a condition |
+| `{{^description}}...{{/description}}` | Absence branch |
+| `{{#rollTotal() roll 10}}...{{/rollTotal() roll 10}}` | Total equal |
+| `rollGreater()` / `rollLess()` | Strict comparison |
+| `rollBetween()` | Inclusive range |
+| `rollWasCrit()` / `rollWasFumble()` | Critical/fumble markers of the roll |
+| `{{#allprops() name attack}}...{{/allprops() name attack}}` | Remaining properties, excluding `name` and `attack` |
 
-Dans `allprops`, utiliser `{{key}}` et `{{value}}`. Les paramètres sont une liste d'exclusions, pas la liste des propriétés à inclure. Répéter les arguments à la fermeture du helper.
+In `allprops`, use `{{key}}` and `{{value}}`. The parameters are a list of exclusions, not the list of properties to include. Repeat the arguments when closing the helper.
 
-Helpers numériques : passer un inline roll approprié, et séparer les résultats devant être comparés indépendamment. Existence d'une propriété, zéro numérique et texte vide sont trois notions distinctes. Préférer un indicateur d'affichage séparé du nombre.
+Numeric helpers: pass an appropriate inline roll, and keep apart the results that must be compared independently. Property existence, numeric zero and empty text are three distinct notions. Prefer a display flag separate from the number.
 
-Pour CRP, employer `computed::nom` pour les résultats calculés. Ne pas supposer que remplacer seulement l'affichage remplace aussi toutes les conditions de critique.
+For CRP, use `computed::name` for computed results. Do not assume that replacing only the display also replaces all the critical conditions.
 
-Source vérifiée le 2026-11-03 : [How to Make Roll Templates](https://help.roll20.net/hc/en-us/articles/360037257334-How-to-Make-Roll-Templates). Détails CRP : [jets-macros.md](jets-macros.md).
+Source verified on 2026-11-03: [How to Make Roll Templates](https://help.roll20.net/hc/en-us/articles/360037257334-How-to-Make-Roll-Templates). CRP details: [rolls-macros.md](rolls-macros.md).
 
-## Avantage, égalités et dégâts
+## Advantage, ties and damage
 
-Si deux résultats sont comparés, traiter premier supérieur, second supérieur et égalité. Utiliser le résultat retenu pour réussite, critique, confirmation et dégâts supplémentaires. Barrer le résultat rejeté ne l'exclut pas automatiquement des autres conditions.
+If two results are compared, handle first higher, second higher and tie. Use the kept result for success, critical, confirmation and extra damage. Striking through the rejected result does not automatically exclude it from the other conditions.
 
-Une propriété `{{degats=...}}` n'applique pas ces dégâts à une réserve. Une liste limitée à vingt attaques ou trente objets est un choix de générateur/template, pas un quota universel. Modifier producteur, template et styles ensemble si cette limite change.
+A `{{damage=...}}` property does not apply that damage to a pool. A list limited to twenty attacks or thirty items is a generator/template choice, not a universal quota. Change producer, template and styles together if this limit changes.
 
-## Liens et descriptions
+## Links and descriptions
 
-Omettre les liens dont l'ID manque : `[Nom]()` est une chaîne non vide, pas une absence de lien. Un lien vers le journal n'accorde pas de permission. Une carte descriptive n'a pas besoin de dés.
+Omit links whose ID is missing: `[Name]()` is a non-empty string, not an absent link. A link to the journal grants no permission. A descriptive card does not need dice.
 
-Tester texte long et multilignes, noms localisés, largeur de chat, classes des inline rolls et thèmes. Une carte déjà publiée ne devient pas un composant DOM éditable par le worker.
+Test long and multiline text, localized names, chat width, inline roll classes and themes. A card already published does not become a DOM component editable by the worker.
 
-## Contrôles ciblés
+## Targeted checks
 
-- Les trois noms concordent, blocs et fermetures aussi.
-- Chaque comparaison reçoit le bon résultat ; égalités et critiques cohérentes.
-- `allprops` exclut les propriétés prévues, sans fuite de champs techniques.
-- Affichage sans propriété facultative et sans dés utilisable.
-- Styles et variables du chat autonomes ; permissions des liens vérifiées.
+- The three names match, as do blocks and closings.
+- Each comparison receives the right result; ties and criticals consistent.
+- `allprops` excludes the intended properties, with no leak of technical fields.
+- Display without optional property and without dice usable.
+- Chat styles and variables self-contained; link permissions verified.

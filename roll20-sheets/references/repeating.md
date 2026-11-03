@@ -1,45 +1,45 @@
-# Sections répétées
+# Repeating sections
 
-Lire pour inventaires, listes, agrégats et actions de ligne.
+Read for inventories, lists, aggregates and row actions.
 
-## Structure et identité
+## Structure and identity
 
 ```html
-<fieldset class="repeating_inventaire">
-  <label>Objet <input type="text" name="attr_nom"></label>
-  <label>Quantité <input type="number" name="attr_quantite" value="1" min="0"></label>
-  <label>Poids <input type="number" name="attr_poids" value="0" min="0" step="0.1"></label>
+<fieldset class="repeating_inventory">
+  <label>Item <input type="text" name="attr_name"></label>
+  <label>Quantity <input type="number" name="attr_quantity" value="1" min="0"></label>
+  <label>Weight <input type="number" name="attr_weight" value="0" min="0" step="0.1"></label>
 </fieldset>
 ```
 
-Le nom sauvegardé devient `repeating_inventaire_<RowID>_poids`. Choisir un nom de section sans underscore interne après `repeating_`. Préserver les noms historiques jusqu'à une migration explicite. Les relations parent/enfant utilisent des collections liées par IDs, pas des sections imbriquées.
+The saved name becomes `repeating_inventory_<RowID>_weight`. Choose a section name with no internal underscore after `repeating_`. Preserve historical names until an explicit migration. Parent/child relationships use collections linked by IDs, not nested sections.
 
-RowID = identité durable ; `$0` = position. Ne pas employer la position comme référence persistante à une arme ou ressource.
+RowID = durable identity; `$0` = position. Do not use position as a persistent reference to a weapon or resource.
 
-| Besoin | API / événement |
+| Need | API / event |
 | --- | --- |
-| Énumérer les IDs | `getSectionIDs("repeating_inventaire", callback)` |
-| Écouter quantité | `change:repeating_inventaire:quantite` |
-| Écouter section | `change:repeating_inventaire` |
-| Suppression | `remove:repeating_inventaire` |
-| Bouton de ligne | `clicked:repeating_inventaire:utiliser` |
-| Ordre modifié | `change:_reporder:inventaire` |
-| Créer un ID | `generateRowID()` puis écrire les attributs complets |
-| Supprimer | `removeRepeatingRow("repeating_inventaire_" + id)` |
+| Enumerate IDs | `getSectionIDs("repeating_inventory", callback)` |
+| Listen to quantity | `change:repeating_inventory:quantity` |
+| Listen to the section | `change:repeating_inventory` |
+| Deletion | `remove:repeating_inventory` |
+| Row button | `clicked:repeating_inventory:use` |
+| Order changed | `change:_reporder:inventory` |
+| Create an ID | `generateRowID()` then write the complete attributes |
+| Delete | `removeRepeatingRow("repeating_inventory_" + id)` |
 
-Sources vérifiées le 2026-11-03 : [workers](https://help.roll20.net/hc/en-us/articles/360037773513-Sheet-Worker-Scripts), [structure](https://help.roll20.net/hc/en-us/articles/360037773413-Intro-to-Sheet-Development).
+Sources verified on 2026-11-03: [workers](https://help.roll20.net/hc/en-us/articles/360037773513-Sheet-Worker-Scripts), [structure](https://help.roll20.net/hc/en-us/articles/360037773413-Intro-to-Sheet-Development).
 
-## Agrégat minimal
+## Minimal aggregate
 
 ```js
-const recalcPoids = () => {
-  getSectionIDs("repeating_inventaire", ids => {
+const recalcWeight = () => {
+  getSectionIDs("repeating_inventory", ids => {
     if (!ids.length) {
-      setAttrs({ poids_total: 0 }, { silent: true });
+      setAttrs({ weight_total: 0 }, { silent: true });
       return;
     }
     const fields = ids.flatMap(id => [
-      `repeating_inventaire_${id}_quantite`, `repeating_inventaire_${id}_poids`
+      `repeating_inventory_${id}_quantity`, `repeating_inventory_${id}_weight`
     ]);
     getAttrs(fields, values => {
       const nonnegative = (value, fallback) => {
@@ -48,38 +48,38 @@ const recalcPoids = () => {
         return Number.isFinite(parsed) ? Math.max(0, parsed) : fallback;
       };
       const total = ids.reduce((sum, id) => {
-        const prefix = `repeating_inventaire_${id}_`;
-        return sum + nonnegative(values[prefix + "quantite"], 1)
-          * nonnegative(values[prefix + "poids"], 0);
+        const prefix = `repeating_inventory_${id}_`;
+        return sum + nonnegative(values[prefix + "quantity"], 1)
+          * nonnegative(values[prefix + "weight"], 0);
       }, 0);
-      setAttrs({ poids_total: Math.round(total * 100) / 100 }, { silent: true });
+      setAttrs({ weight_total: Math.round(total * 100) / 100 }, { silent: true });
     });
   });
 };
-on("sheet:opened change:repeating_inventaire:quantite " +
-   "change:repeating_inventaire:poids remove:repeating_inventaire", recalcPoids);
+on("sheet:opened change:repeating_inventory:quantity " +
+   "change:repeating_inventory:weight remove:repeating_inventory", recalcWeight);
 ```
 
-Choix métier de cet exemple : quantité zéro permise, poids non négatif, arrondi à deux décimales. Adapter ces choix au jeu. Si le total alimente une autre sortie, orchestrer son recalcul après l'écriture silencieuse.
+Game-specific choices in this example: zero quantity allowed, non-negative weight, rounding to two decimals. Adapt these choices to the game. If the total feeds another output, orchestrate its recalculation after the silent write.
 
-## Extraire et retrouver une ligne
+## Extracting and finding a row
 
-Inspecter le vrai `eventInfo` de l'action. Enlever le préfixe de section et le suffixe exact du champ/action ; éviter une regex gloutonne ou des indices fixes liés à la longueur du nom. Retrouver la casse canonique par `getSectionIDs` si nécessaire. Sur `remove`, `sourceAttribute` désigne la ligne, sans suffixe de champ, et `removedInfo` peut fournir les valeurs supprimées.
+Inspect the real `eventInfo` of the action. Remove the section prefix and the exact field/action suffix; avoid a greedy regex or fixed indices tied to the length of the name. Retrieve the canonical case through `getSectionIDs` if needed. On `remove`, `sourceAttribute` designates the row, with no field suffix, and `removedInfo` can provide the removed values.
 
-Créer une ligne par `generateRowID` + `setAttrs` de ses champs explicites. Ne pas dépendre d'un événement `add:repeating_*` non établi dans le contrat utilisé. Recalculer après le callback d'écriture si la création l'exige.
+Create a row with `generateRowID` + `setAttrs` of its explicit fields. Do not depend on an `add:repeating_*` event not established in the contract in use. Recalculate after the write callback if the creation requires it.
 
-## Ordre, miroirs et projections
+## Order, mirrors and projections
 
-`getSectionIDs` ne garantit pas l'ordre manuel. Lire `_reporder_repeating_inventaire`, retenir les IDs encore présents, puis compléter avec les IDs absents de cet ordre selon une politique déterministe. Garder les IDs canoniques.
+`getSectionIDs` does not guarantee manual order. Read `_reporder_repeating_inventory`, keep the IDs still present, then complete with the IDs absent from that order using a deterministic policy. Keep the IDs canonical.
 
-Pour deux vues d'une même collection, conserver nom de section et noms d'attributs ; différencier les classes d'affichage. Tester ajout, édition, suppression et ordre depuis chaque vue. Le DOM généré (`.repcontainer`, `.repitem`) peut différer du fieldset source.
+For two views of the same collection, keep the section name and attribute names; differentiate the display classes. Test adding, editing, deleting and ordering from each view. The generated DOM (`.repcontainer`, `.repitem`) may differ from the source fieldset.
 
-Projection vers des emplacements fixes : stocker la correspondance emplacement→RowID, effacer un emplacement dont la ligne disparaît, annoncer la limite d'affichage. Une limite locale de dix barres n'est pas une limite Roll20. Une synchronisation aller-retour nécessite une source autoritaire et une prévention de boucle.
+Projection to fixed slots: store the slot→RowID mapping, clear a slot whose row disappears, announce the display limit. A local limit of ten bars is not a Roll20 limit. A round-trip synchronization requires an authoritative source and loop prevention.
 
-## Contrôles ciblés
+## Targeted checks
 
-- Ajouter, modifier, déplacer, supprimer, puis supprimer la dernière ligne.
-- Cliquer une action après réorganisation : même RowID ciblé.
-- Tester deux lignes de même nom et une ligne neuve sans saisie préalable.
-- Refaire le test sur ancien personnage et vues miroirs, si présentes.
-- Traiter les liens vers une ligne supprimée ou recréée par import.
+- Add, edit, move, delete, then delete the last row.
+- Click an action after reordering: same RowID targeted.
+- Test two rows with the same name and a new row with no prior input.
+- Repeat the test on an old character and on mirror views, if present.
+- Handle links to a row deleted or recreated by an import.

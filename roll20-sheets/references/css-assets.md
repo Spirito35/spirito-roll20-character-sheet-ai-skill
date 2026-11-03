@@ -1,16 +1,16 @@
-# CSS, thèmes et ressources graphiques
+# CSS, themes and graphic assets
 
-Lire pour mise en page, débordement, apparence ou chargement d'assets.
+Read for layout, overflow, appearance or asset loading.
 
-## Portée et cascade
+## Scope and cascade
 
-Scoper les styles de fiche sous `.charsheet` et une racine propre au projet. Le chat utilise `.sheet-rolltemplate-NOM`, dans un autre contexte. Conserver explicitement les classes nécessaires en CSE. Ne pas imposer un ancêtre `.ui-dialog` sans tester la fenêtre détachée.
+Scope sheet styles under `.charsheet` and a project-specific root. The chat uses `.sheet-rolltemplate-NAME`, in a different context. Explicitly keep the classes needed in CSE. Do not impose a `.ui-dialog` ancestor without testing the detached window.
 
-Avant d'ajouter `!important` : confirmer le fichier chargé, le sélecteur rendu, la propriété calculée, la règle gagnante, sa spécificité et son ordre. Une refonte ne justifie pas de retirer tous les `!important` sans examiner leur rôle.
+Before adding `!important`: confirm the loaded file, the rendered selector, the computed property, the winning rule, its specificity and its order. A redesign does not justify removing every `!important` without examining its role.
 
-Éviter les resets globaux donnant même largeur/hauteur à tous les spans et boutons. Les icônes, valeurs inline et champs éditables n'ont pas la même boîte.
+Avoid global resets giving the same width/height to all spans and buttons. Icons, inline values and editable fields do not have the same box.
 
-## Colonnes rétractables
+## Shrinkable columns
 
 ```css
 .charsheet .sheet-demo-grid {
@@ -26,35 +26,35 @@ Avant d'ajouter `!important` : confirmer le fichier chargé, le sélecteur rendu
 }
 ```
 
-Tester texte long, zoom et différentes largeurs. Pas de largeur universelle obligatoire de 820px. Prévoir un affichage utilisable à la largeur initiale visée. Les descriptions ne doivent pas être tronquées par une hauteur fixe choisie pour un seul exemple.
+Test long text, zoom and different widths. There is no mandatory universal width of 820px. Provide a usable display at the initial target width. Descriptions must not be truncated by a fixed height chosen for a single example.
 
-Les media queries réagissent au viewport du contexte de rendu ; les container queries permettent de viser la boîte d'un conteneur déclaré. Choisir selon la structure réelle, avec test en fiche et popout. Vérifier séparément `:has`, `@container`, animations et variables : « CSS moderne » n'est pas un contrat unique.
+Media queries react to the viewport of the rendering context; container queries target the box of a declared container. Choose according to the real structure, testing in the sheet and in the popout. Check `:has`, `@container`, animations and variables separately: "modern CSS" is not a single contract.
 
-## Thèmes
+## Themes
 
-Centraliser une palette, retirer l'ancienne classe avant la nouvelle et préserver le choix manuel. Le thème du système d'exploitation, celui du VTT et celui de la fiche peuvent différer. Inspecter les marqueurs de thème rendus dans le contexte actuel ; les patrons CSE courants utilisent `body.sheet-darkmode` et un contexte chat distinct.
+Centralize a palette, remove the old class before the new one and preserve the manual choice. The operating system's theme, the VTT's and the sheet's can differ. Inspect the theme markers rendered in the current context; current CSE patterns use `body.sheet-darkmode` and a distinct chat context.
 
-Déclarer les variables nécessaires dans le roll template ; elles n'héritent pas de la racine de fiche. Tester contrastes, champs readonly, focus et états réussite/échec dans chaque thème pris en charge.
+Declare the variables needed in the roll template; they do not inherit from the sheet root. Test contrast, readonly fields, focus and success/failure states in each supported theme.
 
-## Images, polices et icônes
+## Images, fonts and icons
 
-- Une ressource locale sur le disque du créateur n'est pas accessible aux joueurs. Utiliser une URL HTTPS de fichier, stable, avec repli.
-- Une URL GitHub `blob` désigne une page, pas nécessairement une image servie directement.
-- Pour une image liée à un attribut, vérifier le support et essayer URL vide, invalide et inaccessible. Ne pas traiter les pseudo-attributs avatar/token comme des champs librement modifiables ; vérifier leur contrat avant écriture.
-- Fond et bordure : couleur/bordure de secours ; décoration sans interception des clics. Vérifier `border-image` sur contenu court et long.
-- Placer les imports de police avant les règles ordinaires. Garder une famille de repli lisible. Ne pas appliquer automatiquement les anciens contournements Google Fonts Legacy à CSE.
-- Ligature affichant « settings » au lieu d'une icône : examiner requête de police, famille, ligatures, casse et espacement. Ajouter un nom accessible au bouton.
-- Les contrôles repeating sont générés : inspecter `.repcontrol`/`.itemcontrol` et le mode édition avant de les restyler.
+- A local resource on the creator's disk is not accessible to players. Use a stable HTTPS file URL, with a fallback.
+- A GitHub `blob` URL designates a page, not necessarily an image served directly.
+- For an image tied to an attribute, check support and try an empty, invalid and unreachable URL. Do not treat the avatar/token pseudo-attributes as freely modifiable fields; check their contract before writing.
+- Background and border: fallback color/border; decoration that does not intercept clicks. Check `border-image` on short and long content.
+- Place font imports before ordinary rules. Keep a readable fallback family. Do not automatically apply the old Legacy Google Fonts workarounds to CSE.
+- Ligature showing "settings" instead of an icon: examine the font request, family, ligatures, case and spacing. Add an accessible name to the button.
+- Repeating controls are generated: inspect `.repcontrol`/`.itemcontrol` and the edit mode before restyling them.
 
-## Conventions facultatives
+## Optional conventions
 
-Le CSS sans commentaires, non-ASCII ou emojis est un choix possible de projet, pas une règle universelle de Roll20. Appliquer uniquement une convention explicitement demandée, en conservant ses exceptions documentées. Ne pas effacer un commentaire de licence ou une URL par regex globale.
+CSS without comments, non-ASCII characters or emojis is a possible project choice, not a universal Roll20 rule. Apply a convention only when explicitly requested, keeping its documented exceptions. Do not delete a license comment or a URL with a global regex.
 
-## Contrôles ciblés
+## Targeted checks
 
-- Fiche et chat, fenêtre intégrée et détachée, thèmes prévus.
-- Noms longs, lignes répétées nombreuses, boutons d'édition/suppression.
-- Focus visible, overlays non bloquants, assets indisponibles.
-- Si politique CSS stricte : inspection textuelle des fichiers livrés, y compris styles de templates ; un résultat vide ne certifie pas la compatibilité VTT.
+- Sheet and chat, embedded and detached window, intended themes.
+- Long names, many repeating rows, edit/delete buttons.
+- Visible focus, non-blocking overlays, unavailable assets.
+- If a strict CSS policy applies: textual inspection of the delivered files, including template styles; an empty result does not certify VTT compatibility.
 
-Cadre CSE vérifié le 2026-11-03 : [sanitization](https://help.roll20.net/hc/en-us/articles/360061735034-iFrame-and-Sanitization-Changes). Les choix de grille, jauges et largeur sont des recommandations issues du travail sur les fiches locales.
+CSE framework verified on 2026-11-03: [sanitization](https://help.roll20.net/hc/en-us/articles/360061735034-iFrame-and-Sanitization-Changes). The grid, gauge and width choices are recommendations drawn from work on the local sheets.

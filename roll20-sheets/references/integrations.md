@@ -1,54 +1,54 @@
-# Paramètres et intégrations Roll20
+# Roll20 settings and integrations
 
-Lire seulement pour l'intégration demandée. Ces fonctions ne sont pas des prérequis à une fiche simple.
+Read only for the requested integration. These features are not prerequisites for a simple sheet.
 
-## Paramètres de campagne
+## Campaign settings
 
-`sheet.json` peut déclarer `useroptions`. L'option désigne un attribut sans préfixe `attr_`, un type de contrôle, des libellés et une valeur initiale. Séparer valeur technique et traduction.
+`sheet.json` can declare `useroptions`. An option designates an attribute without the `attr_` prefix, a control type, labels and an initial value. Separate technical value and translation.
 
-Un changement de valeur par défaut ne migre pas automatiquement les personnages existants. Prévoir une action explicite si le produit doit appliquer les nouveaux réglages à des données déjà créées. Ne pas écraser les choix individuels à chaque `sheet:opened`.
+Changing a default value does not automatically migrate existing characters. Plan an explicit action if the product must apply the new settings to data already created. Do not overwrite individual choices on every `sheet:opened`.
 
-Source vérifiée le 2026-11-03 : [Default Sheet Settings](https://help.roll20.net/hc/en-us/articles/360041542554-Default-Sheet-Settings).
+Source verified on 2026-11-03: [Default Sheet Settings](https://help.roll20.net/hc/en-us/articles/360041542554-Default-Sheet-Settings).
 
 ## Compendium
 
-Déclarer la compatibilité par le champ `compendium` approprié dans `sheet.json`, ou par le réglage de la partie pour une fiche personnalisée. Examiner le schéma réel de l'entrée à importer.
+Declare compatibility through the appropriate `compendium` field in `sheet.json`, or through the game setting for a custom sheet. Examine the real schema of the entry to be imported.
 
 ```html
-<fieldset class="repeating_objets">
+<fieldset class="repeating_items">
   <div class="compendium-drop-target">
-    <input type="text" name="attr_nom" accept="Name">
-    <input type="text" name="attr_categorie" accept="Category">
+    <input type="text" name="attr_name" accept="Name">
+    <input type="text" name="attr_category" accept="Category">
   </div>
 </fieldset>
 ```
 
-Les valeurs de `accept` doivent correspondre aux propriétés du compendium choisi ; `Name` et `Category` ne promettent pas un schéma universel. Examiner les données reçues avant de construire des traitements complémentaires. Si plusieurs champs arrivent, ne pas supposer que le premier changement signifie que tout le dépôt est terminé.
+The `accept` values must match the properties of the chosen compendium; `Name` and `Category` do not promise a universal schema. Examine the data received before building additional processing. If several fields arrive, do not assume that the first change means the whole drop is complete.
 
-Source vérifiée le 2026-11-03 : [Compendium Integration](https://help.roll20.net/hc/en-us/articles/360043790493-Compendium-Integration).
+Source verified on 2026-11-03: [Compendium Integration](https://help.roll20.net/hc/en-us/articles/360043790493-Compendium-Integration).
 
-## Token par défaut
+## Default token
 
-`setDefaultToken` est une fonction spécialisée du workflow de dépôt compendium. Vérifier les propriétés admises et les événements documentés. Ce n'est pas un accès général à tous les tokens de campagne. Voir [Sheet Worker Scripts](https://help.roll20.net/hc/en-us/articles/360037773513-Sheet-Worker-Scripts).
+`setDefaultToken` is a specialized function of the compendium drop workflow. Check the properties allowed and the documented events. It is not a general access to all campaign tokens. See [Sheet Worker Scripts](https://help.roll20.net/hc/en-us/articles/360037773513-Sheet-Worker-Scripts).
 
 ## Charactermancer
 
-L'assistant de création possède ses étapes, état temporaire, événements et fonctions dédiés. Avant implémentation, lire le cycle de vie, les slides, la sortie et la reprise dans la [documentation Charactermancer](https://help.roll20.net/hc/en-us/articles/360037257394-Charactermancer), consultée le 2026-11-03.
+The creation wizard has its own steps, temporary state, events and dedicated functions. Before implementing, read the lifecycle, slides, output and resumption in the [Charactermancer documentation](https://help.roll20.net/hc/en-us/articles/360037257394-Charactermancer), consulted on 2026-11-03.
 
-Séparer les choix temporaires de leur application finale. Tester retour arrière, annulation, reprise, données manquantes et application finale répétée. Vérifier aussi les règles de contribution si la fiche doit être soumise publiquement. Cette référence est une orientation, pas un manuel complet de l'API Charactermancer.
+Separate temporary choices from their final application. Test going back, cancelling, resuming, missing data and repeated final application. Also check the contribution rules if the sheet is to be submitted publicly. This reference is an orientation, not a complete manual of the Charactermancer API.
 
-## Scripts Mod/API
+## Mod/API scripts
 
-`sendChat`, accès aux objets de campagne et modification d'une autre cible relèvent d'un environnement distinct des Sheet Workers. Une commande `!nom` suppose le script correspondant et ses permissions ; documenter la dépendance et son comportement absent.
+`sendChat`, access to campaign objects and modification of another target belong to an environment distinct from Sheet Workers. A `!name` command assumes the corresponding script and its permissions; document the dependency and its behavior when absent.
 
-Une écriture d'attribut par un Mod peut nécessiter un mécanisme adapté pour déclencher les workers. Examiner le contrat actuel de l'API et du type de fiche, notamment pour Beacon. Ne pas supposer qu'un appel de données reproduit les événements d'une saisie UI.
+An attribute write by a Mod may require a suitable mechanism to trigger the workers. Examine the current contract of the API and of the sheet type, notably for Beacon. Do not assume that a data call reproduces the events of a UI input.
 
-Pour une implémentation Mod, consulter les points d'entrée de [sources.md](sources.md). Ce skill couvre la frontière avec les fiches ; il ne fournit pas une API de campagne fictive dans le worker.
+For a Mod implementation, consult the entry points in [sources.md](sources.md). This skill covers the boundary with sheets; it does not provide a fictional campaign API in the worker.
 
-## Contrôles ciblés
+## Targeted checks
 
-- Défauts sur personnage neuf et maintien des choix sur personnage existant.
-- Dépôt d'une entrée complète, incomplète et incompatible ; noms de propriétés réels.
-- Aucun écrasement prématuré sur événement partiel.
-- Intégration absente ou permission manquante : comportement explicite.
-- Charactermancer : annulation sans mutation finale indésirable, application sans doublon.
+- Defaults on a new character and preservation of choices on an existing character.
+- Drop of a complete, incomplete and incompatible entry; real property names.
+- No premature overwrite on a partial event.
+- Absent integration or missing permission: explicit behavior.
+- Charactermancer: cancellation without unwanted final mutation, application without duplicates.

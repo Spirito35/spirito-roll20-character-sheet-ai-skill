@@ -1,35 +1,35 @@
-# Diagnostic par symptôme
+# Diagnosis by symptom
 
-Lire quand la couche en cause n'est pas encore identifiée. Choisir une ligne puis ouvrir sa référence, sans auditer toute la fiche.
+Read when the responsible layer is not yet identified. Pick a row, then open its reference, without auditing the whole sheet.
 
-Commencer par les fichiers effectivement chargés, leur mode, le scénario attendu et l'erreur console initiale. Comparer un personnage neuf et celui qui échoue. Réduire à un champ, une ligne ou un bouton ; relever valeurs avant/après et commande produite.
+Start with the files actually loaded, their mode, the expected scenario and the first console error. Compare a new character with the failing one. Reduce to one field, one row or one button; note the before/after values and the command produced.
 
-| Symptôme | Premier contrôle | Référence |
+| Symptom | First check | Reference |
 | --- | --- | --- |
-| Aucun style / fiche vide | Paire chargée, structure, mode et console | [environnement](environnement.md), [HTML](html.md) |
-| Tous les calculs arrêtés | Première erreur JS, blocs et noms dupliqués | [workers](workers.md) |
-| Saisie perdue à la fermeture | `name="attr_..."`, valeur réellement enregistrée | [données](donnees.md) |
-| Deux saisies liées involontairement | Attribut homonyme | [données](donnees.md) |
-| Ancien personnage seul affecté | Valeur sauvegardée, init/migration | [migrations](migrations-import.md) |
-| Zéro remplacé / `NaN` / concaténation | Conversions, fallback truthy | [données](donnees.md) |
-| Calcul correct seulement après réouverture | Événement manquant ou chaîne coupée par silent | [workers](workers.md) |
-| Total périmé après suppression | Listener remove, branche collection vide | [repeating](repeating.md) |
-| Mauvaise ligne après déplacement | RowID, position prise pour identité | [repeating](repeating.md) |
-| Liste chat mal ordonnée | Ordre manuel ignoré | [repeating](repeating.md) |
-| Bonus affiché mais jet ancien | Macro dérivée non régénérée | [jets](jets-macros.md) |
-| Bouton muet | Overlay, type, nom, listener, console | [interface](interface.md), [HTML](html.md) |
-| Dés inattendus / erreur de jet | Commande exacte, fragments vides/masqués | [jets](jets-macros.md) |
-| Critique incohérent en avantage | Résultat retenu différent selon branches | [templates](roll-templates.md) |
-| Résultat CRP manquant | finishRoll, nom de propriété, computed | [jets](jets-macros.md) |
-| Mode privé public | Préfixe effectivement envoyé, autre lecteur | [jets](jets-macros.md) |
-| Coût incohérent en double clic | Lectures concurrentes, moment du prélèvement | [ressources](ressources.md) |
-| Repos ou ouverture efface une saisie | Recalcul écrasant le manuel | [ressources](ressources.md), [migrations](migrations-import.md) |
-| Onglet cassé après ajout d'un wrapper | Parenté/adjacence CSS, attribut de navigation | [interface](interface.md) |
-| Jauge incorrecte | Classe existante, valeur/max, dimensions | [interface](interface.md) |
-| Débordement / popout cassé | Minimum intrinsèque, ancêtres des sélecteurs | [CSS](css-assets.md) |
-| Icône affichée en toutes lettres | Chargement de fonte et ligatures | [CSS](css-assets.md) |
-| Thème du chat différent | Variables et classes du contexte chat | [templates](roll-templates.md) |
-| Clé de traduction affichée | JSON chargé, clé exacte, clé dynamique | [i18n](i18n-accessibilite.md) |
-| Accents illisibles dans le terminal | Décoder UTF-8 avant de conclure à une corruption | [validation](validation.md) |
+| No style / empty sheet | Loaded pair, structure, mode and console | [environment](environment.md), [HTML](html.md) |
+| All calculations stopped | First JS error, duplicated blocks and names | [workers](workers.md) |
+| Input lost on closing | `name="attr_..."`, value actually saved | [data](data.md) |
+| Two inputs unintentionally linked | Same-named attribute | [data](data.md) |
+| Only an old character affected | Saved value, init/migration | [migrations](migrations-import.md) |
+| Zero replaced / `NaN` / concatenation | Conversions, truthy fallback | [data](data.md) |
+| Calculation correct only after reopening | Missing event or chain cut by silent | [workers](workers.md) |
+| Stale total after deletion | Remove listener, empty-collection branch | [repeating](repeating.md) |
+| Wrong row after a move | RowID, position taken as identity | [repeating](repeating.md) |
+| Chat list in the wrong order | Manual order ignored | [repeating](repeating.md) |
+| Bonus displayed but old roll | Derived macro not regenerated | [rolls](rolls-macros.md) |
+| Dead button | Overlay, type, name, listener, console | [interface](interface.md), [HTML](html.md) |
+| Unexpected dice / roll error | Exact command, empty/hidden fragments | [rolls](rolls-macros.md) |
+| Inconsistent critical with advantage | Kept result differs between branches | [templates](roll-templates.md) |
+| Missing CRP result | finishRoll, property name, computed | [rolls](rolls-macros.md) |
+| Private mode shows publicly | Prefix actually sent, another reader | [rolls](rolls-macros.md) |
+| Inconsistent cost on double click | Concurrent reads, moment of deduction | [resources](resources.md) |
+| Rest or opening erases an input | Recalculation overwriting the manual value | [resources](resources.md), [migrations](migrations-import.md) |
+| Tab broken after adding a wrapper | CSS parentage/adjacency, navigation attribute | [interface](interface.md) |
+| Incorrect gauge | Existing class, value/max, dimensions | [interface](interface.md) |
+| Overflow / broken popout | Intrinsic minimum, selector ancestors | [CSS](css-assets.md) |
+| Icon displayed as plain text | Font loading and ligatures | [CSS](css-assets.md) |
+| Different chat theme | Variables and classes of the chat context | [templates](roll-templates.md) |
+| Translation key displayed | JSON loaded, exact key, dynamic key | [i18n](i18n-accessibility.md) |
+| Unreadable accents in the terminal | Decode UTF-8 before concluding corruption | [validation](validation.md) |
 
-Ne pas attribuer automatiquement un CSS rejeté aux commentaires ou à Unicode. Vérifier syntaxe, mode et différence avec la version fonctionnelle. Ne pas transformer une hypothèse de cette table en diagnostic certain sans reproduction ou preuve de code.
+Do not automatically attribute a rejected CSS to comments or Unicode. Check syntax, mode and the difference from the working version. Do not turn a hypothesis from this table into a certain diagnosis without a reproduction or code evidence.

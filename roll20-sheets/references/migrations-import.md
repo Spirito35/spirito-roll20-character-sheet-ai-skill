@@ -1,46 +1,46 @@
-# Initialisation, migrations et import/export
+# Initialization, migrations and import/export
 
-Lire dès qu'une modification touche les données persistantes ou un import.
+Read whenever a change touches persistent data or an import.
 
-## Initialiser
+## Initializing
 
-Compléter les champs absents sans écraser saisies, zéros et exceptions. Un personnage dépourvu de version peut être ancien : ne pas l'assimiler automatiquement à une fiche neuve. Utiliser les données présentes et l'historique du schéma pour choisir le chemin.
+Fill in missing fields without overwriting inputs, zeros and exceptions. A character with no version may be old: do not automatically treat it as a new sheet. Use the data present and the schema history to choose the path.
 
-Matérialiser les champs nécessaires au premier jet d'une ligne si le contexte l'exige. Ne pas recréer une ligne ou rétablir ses défauts à chaque ouverture.
+Materialize the fields needed for a row's first roll if the context requires it. Do not recreate a row or restore its defaults on every opening.
 
-## Migrer
+## Migrating
 
-Version de données du personnage distincte de la version de publication du fichier. Enchaîner les migrations dans l'ordre, attendre leurs écritures et enregistrer la nouvelle version après réussite. Une migration rejouée ne doit ni doubler les valeurs ni perdre les données.
+The character's data version is distinct from the file's publication version. Chain migrations in order, wait for their writes and record the new version after success. A replayed migration must neither double the values nor lose data.
 
-Renommer attribut, section ou bouton public peut affecter anciennes fiches, token actions et liens de chat. Prévoir correspondance, compatibilité ou rupture annoncée. Ne pas migrer des données sans rapport avec la demande.
+Renaming a public attribute, section or button can affect old sheets, token actions and chat links. Plan a mapping, compatibility or an announced break. Do not migrate data unrelated to the request.
 
-Avant un changement risquant d'effacer des données, garder une copie récupérable et un personnage d'essai représentatif. Préserver les champs manuels distincts des calculs automatiques.
+Before a change that risks erasing data, keep a recoverable copy and a representative test character. Preserve manual fields distinct from automatic calculations.
 
-## Contrat d'import
+## Import contract
 
-| Mode | Effet |
+| Mode | Effect |
 | --- | --- |
-| Ajouter | Nouvelles lignes ; un second import peut créer des doublons |
-| Fusionner | Réutilisation selon une clé stable explicitée |
-| Remplacer | Remplacement d'un périmètre clairement défini |
+| Add | New rows; a second import may create duplicates |
+| Merge | Reuse based on an explicit stable key |
+| Replace | Replacement of a clearly defined scope |
 
-Avant toute suppression ou écriture : parser le JSON, vérifier format/version, types, champs autorisés, bornes, volume et relations. Un simple `JSON.parse` réussi ou une version de bon type ne valide pas le contenu.
+Before any deletion or write: parse the JSON, check format/version, types, allowed fields, bounds, volume and relationships. A successful `JSON.parse` or a version of the right type does not validate the content.
 
-Préparer les données finales avant de remplacer les anciennes. Table ancien ID→nouvel ID si des lignes se réfèrent entre elles ; restaurer l'ordre manuel lorsqu'il compte. Éviter d'utiliser des totaux importés comme nouvelles entrées autoritaires si les bases permettent de les recalculer.
+Prepare the final data before replacing the old. Old ID→new ID table if rows refer to each other; restore the manual order where it matters. Avoid using imported totals as new authoritative inputs if the bases allow recomputing them.
 
-Attendre les écritures, relancer calculs et état visuel, puis afficher le résultat de l'import. Une limite de lot choisie par un ancien importeur n'est pas un quota Roll20 établi.
+Wait for the writes, rerun calculations and visual state, then display the result of the import. A batch limit chosen by an old importer is not an established Roll20 quota.
 
 ## Export
 
-Définir liste des données, version, sections, ordre et liens. Ne pas inclure un état de calcul transitoire comme donnée source sans raison. Expliquer les omissions. Un export est utile seulement si sa restauration a été essayée sur une copie.
+Define the list of data, version, sections, order and links. Do not include a transient calculation state as source data without reason. Explain the omissions. An export is useful only if its restoration has been tried on a copy.
 
-## Contrôles ciblés
+## Targeted checks
 
-- Personnage ancien, partiellement rempli, sans version ; zéro préservé.
-- Réouverture après migration : aucune double conversion.
-- JSON invalide ou contenu incohérent : aucune mutation.
-- Deux imports identiques : résultat conforme au mode choisi.
-- Relations de lignes et ordre conservés, champ manuel préservé.
-- Interruption/échec : pas de version finale enregistrée prématurément.
+- Old, partially filled character, with no version; zero preserved.
+- Reopening after migration: no double conversion.
+- Invalid JSON or inconsistent content: no mutation.
+- Two identical imports: result consistent with the chosen mode.
+- Row relationships and order kept, manual field preserved.
+- Interruption/failure: no final version recorded prematurely.
 
-Provenance : recommandations de conception issues des limites rencontrées dans les importeurs et migrations étudiés. Primitives natives : [workers.md](workers.md), [repeating.md](repeating.md).
+Provenance: design recommendations drawn from the limits encountered in the importers and migrations studied. Native primitives: [workers.md](workers.md), [repeating.md](repeating.md).

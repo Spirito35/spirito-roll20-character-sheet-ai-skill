@@ -1,61 +1,61 @@
 ---
 name: roll20-sheets
-description: Créer, modifier, déboguer et vérifier des fiches de personnage Roll20 HTML/CSS avec Sheet Workers, sections répétées, macros et roll templates. Utiliser pour les fiches CSE ou Legacy ; pour Beacon, consulter la référence d'orientation avant de choisir une autre architecture.
+description: Create, modify, debug and verify Roll20 HTML/CSS character sheets with Sheet Workers, repeating sections, macros and roll templates. Use for CSE or Legacy sheets; for Beacon, read the orientation reference before choosing another architecture.
 ---
 
-# Fiches Roll20
+# Roll20 Sheets
 
-Travailler sur le besoin demandé, en préservant les données des personnages et les règles du jeu. Ce skill fournit des procédures et des références ciblées ; il ne remplace pas les instructions du projet.
+Work on the requested need, preserving character data and game rules. This skill provides procedures and targeted references; it does not replace the project's own instructions.
 
-## Commencer
+## Getting started
 
-1. Identifier les fichiers effectivement utilisés : sources ou sorties de build, HTML/CSS, `sheet.json` et traductions éventuelles. Écarter les sauvegardes et variantes non concernées.
-2. Déterminer le moteur : CSE, Legacy ou Beacon. Si le dépôt ne suffit pas, indiquer l'incertitude et vérifier le réglage réellement chargé avant une décision dépendante du mode.
-3. Repérer les attributs, événements, macros et sélecteurs concernés par recherche ciblée. Lire leurs producteurs et consommateurs, pas toutes les fiches du dépôt.
-4. Lire seulement les références utiles ci-dessous. Pour une création, commencer par environnement, données et HTML, puis ajouter les sujets nécessaires. Pour un correctif, suivre la cause et ses dépendances.
+1. Identify the files actually in use: sources or build outputs, HTML/CSS, `sheet.json` and any translations. Set aside backups and unrelated variants.
+2. Determine the engine: CSE, Legacy or Beacon. If the repository is not enough, state the uncertainty and check the setting actually loaded before making any mode-dependent decision.
+3. Locate the attributes, events, macros and selectors involved with targeted searches. Read their producers and consumers, not every sheet in the repository.
+4. Read only the references below that are useful. For a creation, start with environment, data and HTML, then add the topics needed. For a fix, follow the cause and its dependencies.
 
-## Choisir les références
+## Choosing references
 
-Tous les chemins sont relatifs au dossier de ce skill. Une ligne indique quand lire un fichier, pas une obligation de tout charger.
+All paths are relative to this skill's folder. A row says when to read a file, not that everything must be loaded.
 
-| Besoin | Référence |
+| Need | Reference |
 | --- | --- |
-| Mode, chargement, migration Legacy/CSE, orientation Beacon | [environnement.md](references/environnement.md) |
-| Attributs, vide/zéro, valeurs calculées | [donnees.md](references/donnees.md) |
-| Contrôles HTML, structure, formulaires | [html.md](references/html.md) |
-| Calculs, événements, asynchronisme, lenteur | [workers.md](references/workers.md) |
-| Lignes répétées, identité, ordre, agrégats | [repeating.md](references/repeating.md) |
-| Onglets, panneaux, jauges, `$20` | [interface.md](references/interface.md) |
-| Mise en page, thèmes, images, polices | [css-assets.md](references/css-assets.md) |
-| Boutons, dés, queries, confidentialité, CRP | [jets-macros.md](references/jets-macros.md) |
-| Rendu chat, conditions, résultats calculés | [roll-templates.md](references/roll-templates.md) |
-| PV, coûts, repos, dégâts | [ressources.md](references/ressources.md) |
-| Bonus, plafonds, parseurs, dépendances métier | [moteurs-regles.md](references/moteurs-regles.md) |
-| Renommage, anciennes données, import/export | [migrations-import.md](references/migrations-import.md) |
-| Traductions, clavier, accessibilité, impression | [i18n-accessibilite.md](references/i18n-accessibilite.md) |
-| Compendium, paramètres de campagne, Charactermancer, Mod/API | [integrations.md](references/integrations.md) |
-| Soumission au dépôt communautaire | [publication.md](references/publication.md) |
-| Cause d'un symptôme encore inconnue | [diagnostic.md](references/diagnostic.md) |
-| Choix des contrôles et recette de livraison | [validation.md](references/validation.md) |
-| Fonction non couverte, doute de compatibilité, source à actualiser | [sources.md](references/sources.md) |
+| Mode, loading, Legacy/CSE migration, Beacon orientation | [environment.md](references/environment.md) |
+| Attributes, empty/zero, computed values | [data.md](references/data.md) |
+| HTML controls, structure, forms | [html.md](references/html.md) |
+| Calculations, events, asynchrony, slowness | [workers.md](references/workers.md) |
+| Repeating rows, identity, order, aggregates | [repeating.md](references/repeating.md) |
+| Tabs, panels, gauges, `$20` | [interface.md](references/interface.md) |
+| Layout, themes, images, fonts | [css-assets.md](references/css-assets.md) |
+| Buttons, dice, queries, privacy, CRP | [rolls-macros.md](references/rolls-macros.md) |
+| Chat rendering, conditions, computed results | [roll-templates.md](references/roll-templates.md) |
+| HP, costs, rests, damage | [resources.md](references/resources.md) |
+| Bonuses, caps, parsers, game-specific dependencies | [rules-engines.md](references/rules-engines.md) |
+| Renaming, legacy data, import/export | [migrations-import.md](references/migrations-import.md) |
+| Translations, keyboard, accessibility, printing | [i18n-accessibility.md](references/i18n-accessibility.md) |
+| Compendium, campaign settings, Charactermancer, Mod/API | [integrations.md](references/integrations.md) |
+| Submission to the community repository | [publishing.md](references/publishing.md) |
+| Cause of a symptom still unknown | [diagnostic.md](references/diagnostic.md) |
+| Choosing checks and the delivery checklist | [validation.md](references/validation.md) |
+| Uncovered feature, compatibility doubt, source to refresh | [sources.md](references/sources.md) |
 
-## Invariants communs
+## Common invariants
 
-- Un nom d'attribut persistant est un contrat de données. Le renommer demande d'examiner les anciens personnages, macros et intégrations.
-- Une ouverture ou un recalcul ne doit pas réinitialiser une dépense ou un choix manuel. Distinguer absent, vide et zéro.
-- Le worker n'est pas un script de page web ni un script Mod/API de campagne. Ne pas inventer de fonction native ou de capacité DOM.
-- Une option d'affichage n'est pas une permission ; une valeur affichée dans le chat n'est pas une modification des réserves.
-- Distinguer règle documentée, recommandation de conception et convention de projet. Le nombre de fiches utilisant une technique ne prouve ni sa validité ni une limite de plateforme.
-- Appliquer les conventions locales et leurs exceptions explicites. Les règles CSS « ASCII uniquement » ou « sans commentaires » ne sont pas imposées par ce skill public.
+- A persistent attribute name is a data contract. Renaming it requires examining existing characters, macros and integrations.
+- Opening a sheet or recalculating must not reset a spent resource or a manual choice. Distinguish absent, empty and zero.
+- A worker is neither a web page script nor a campaign Mod/API script. Do not invent native functions or DOM capabilities.
+- A display option is not a permission; a value shown in chat is not a change to the pools.
+- Distinguish documented rule, design recommendation and project convention. The number of sheets using a technique proves neither its validity nor a platform limit.
+- Apply local conventions and their explicit exceptions. The "ASCII only" or "no comments" CSS rules are not imposed by this public skill.
 
-## Modifier et vérifier
+## Modifying and verifying
 
-Garder un état récupérable avant une modification importante. Adapter le périmètre au besoin ; ne pas transformer une réparation en refonte générale.
+Keep a recoverable state before any significant change. Adapt the scope to the need; do not turn a repair into a general rewrite.
 
-Sélectionner les contrôles de la référence concernée et de [validation.md](references/validation.md). Si Python 3.10+ est disponible, le vérificateur facultatif [check_sheet.py](scripts/check_sheet.py) contrôle les fichiers explicitement passés sans les modifier ; consulter `--help` pour ses options. Il ne certifie pas le fonctionnement dans Roll20.
+Select the checks from the relevant reference and from [validation.md](references/validation.md). If Python 3.10+ is available, the optional checker [check_sheet.py](scripts/check_sheet.py) inspects the files explicitly passed to it without modifying them; see `--help` for its options. It does not certify that anything works in Roll20.
 
-Conclure avec les fichiers changés, le comportement obtenu, les contrôles réellement exécutés et les essais Roll20 restant à faire. Ne pas annoncer un test en partie sur la seule base d'une lecture ou d'un contrôle syntaxique.
+Conclude with the files changed, the resulting behavior, the checks actually run and the Roll20 tests still to be done. Do not report something as partly tested on the basis of a read-through or a syntax check alone.
 
-## Compléter une lacune
+## Filling a gap
 
-Ouvrir la source officielle correspondant au sujet, vérifier son moteur et sa portée, puis ajouter une règle courte dans la bonne référence avec URL et date de consultation. En cas de contradiction documentaire, conserver la nuance et prévoir un essai minimal. Sans accès à la source ou au VTT, signaler ce qui reste à confirmer plutôt qu'inventer un contrat.
+Open the official source for the topic, check its engine and scope, then add a short rule to the right reference with the URL and the date consulted. In case of contradictory documentation, keep the nuance and plan a minimal test. Without access to the source or to the VTT, flag what remains to be confirmed rather than inventing a contract.

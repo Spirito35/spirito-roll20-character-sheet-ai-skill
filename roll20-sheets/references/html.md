@@ -1,41 +1,41 @@
-# Structure HTML et contrôles
+# HTML structure and controls
 
-Lire quand la structure ou un contrôle de fiche change.
+Read when a sheet's structure or a control changes.
 
-Livrer un fragment, sans document englobant `DOCTYPE`/`html`/`head`/`body` ni formulaire imbriqué. Le CSS va dans la sortie CSS. Le JS de fiche va dans un bloc `script` de type `text/worker` ; un fichier JS source séparé nécessite un build qui l'intègre. Ne pas inventer d'exécution par `onclick` ou script externe.
+Deliver a fragment, with no enclosing `DOCTYPE`/`html`/`head`/`body` document and no nested form. CSS goes in the CSS output. Sheet JS goes in a `script` block of type `text/worker`; a separate source JS file requires a build that embeds it. Do not invent execution through `onclick` or an external script.
 
 ```html
 <div class="sheet-demo">
-  <label>Force <input type="number" name="attr_force" value="0"></label>
+  <label>Strength <input type="number" name="attr_strength" value="0"></label>
   <button type="roll" name="roll_test"
-    value="&{template:default} {{name=Test}} {{resultat=[[1d20+@{force}]]}}">Tester</button>
+    value="&{template:default} {{name=Test}} {{result=[[1d20+@{strength}]]}}">Test</button>
 </div>
 ```
 
-Placer les templates puis le bloc worker après les contrôles est un choix de livraison pratique. Une fiche sans logique JS n'a pas besoin d'un worker vide ; si elle en contient, regrouper ses workers dans un seul bloc en résolvant les collisions de noms.
+Placing the templates and then the worker block after the controls is a practical delivery choice. A sheet without JS logic does not need an empty worker; if it has any, group its workers in a single block, resolving name collisions.
 
-## Contrôles
+## Controls
 
-- `name="attr_..."` assure la liaison ; un ID seul ne sauvegarde pas.
-- Select : valeurs techniques explicites et stables, libellés traduisibles.
-- Radios : même attribut, valeurs distinctes, un seul défaut coché.
-- Texte multiligne : textarea. Un placeholder ne remplace pas un libellé.
-- `type="action"` correspond à un événement `clicked:...` ; `type="roll"` porte une commande de chat.
-- IDs uniques ; éviter les IDs dans les patrons répétables. Envelopper une saisie dans son label permet de ne pas dépendre de `for`/`id`.
-- Tables pour données tabulaires, Grid/Flex pour mise en page.
+- `name="attr_..."` provides the binding; an ID alone does not save.
+- Select: explicit, stable technical values; translatable labels.
+- Radios: same attribute, distinct values, a single checked default.
+- Multiline text: textarea. A placeholder does not replace a label.
+- `type="action"` corresponds to a `clicked:...` event; `type="roll"` carries a chat command.
+- Unique IDs; avoid IDs in repeatable templates. Wrapping an input in its label avoids depending on `for`/`id`.
+- Tables for tabular data, Grid/Flex for layout.
 
-## Filtrage
+## Filtering
 
-Identifier CSE/Legacy avant de diagnostiquer un élément supprimé : [environnement.md](environnement.md). L'ancien guide interdisait globalement `section`, `header` et `footer` ; la documentation CSE annonce le support de HTML sémantique. Utiliser des conteneurs simples si la compatibilité est inconnue, sans transformer cette prudence en interdiction universelle.
+Identify CSE/Legacy before diagnosing a removed element: [environment.md](environment.md). The old guide globally forbade `section`, `header` and `footer`; the CSE documentation announces support for semantic HTML. Use simple containers if compatibility is unknown, without turning this caution into a universal prohibition.
 
-Si un nom ou un élément disparaît, inspecter le DOM après chargement et réduire au cas minimal. Les listes historiques de sous-chaînes filtrées ne doivent pas déclencher un renommage massif sans reproduction. Une classe contenant `eval` n'est pas une preuve suffisante d'un bug CSE.
+If a name or an element disappears, inspect the DOM after loading and reduce to the minimal case. Historical lists of filtered substrings must not trigger a mass rename without a reproduction. A class containing `eval` is not sufficient proof of a CSE bug.
 
-## Contrôles ciblés
+## Targeted checks
 
-- Persistance après fermeture/réouverture.
-- Bouton lié au bon événement ou à la bonne macro.
-- Labels, focus et saisie clavier utilisables.
-- Pas d'ID statique dupliqué en répétition ; pas d'injection de formulaire/document complet.
-- Structure testée dans le mode réel, y compris le chat si un template change.
+- Persistence after closing/reopening.
+- Button bound to the right event or the right macro.
+- Labels, focus and keyboard input usable.
+- No duplicated static ID in a repeating section; no injection of a full form/document.
+- Structure tested in the real mode, including the chat if a template changes.
 
-Sources vérifiées le 2026-11-03 : [Intro](https://help.roll20.net/hc/en-us/articles/360037773413-Intro-to-Sheet-Development), [CSE](https://help.roll20.net/hc/en-us/articles/360061735034-iFrame-and-Sanitization-Changes), [workers](https://help.roll20.net/hc/en-us/articles/360037773513-Sheet-Worker-Scripts). Voir environnement pour leurs différences de portée.
+Sources verified on 2026-11-03: [Intro](https://help.roll20.net/hc/en-us/articles/360037773413-Intro-to-Sheet-Development), [CSE](https://help.roll20.net/hc/en-us/articles/360061735034-iFrame-and-Sanitization-Changes), [workers](https://help.roll20.net/hc/en-us/articles/360037773513-Sheet-Worker-Scripts). See environment for their differences in scope.
