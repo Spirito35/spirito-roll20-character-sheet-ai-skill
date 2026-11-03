@@ -5,6 +5,9 @@ https://www.spirito.fr
 
 1. Scope
 
+This project is "Spirito Roll20 Character Sheet AI Skill", abbreviated
+"Spirito R20CSAIS".
+
 "Material" means the original instructions, documentation, examples and software
 in this repository distributed with this license. "Adaptations" means modified,
 translated or otherwise adapted versions of the Material. Third-party works
@@ -25,7 +28,7 @@ When sharing the Material or Adaptations, retain this license and the copyright
 notice, and provide this credit in an accompanying README, credits page or
 similarly reasonably visible location:
 
-    Spirito R20CharSheet Skill - https://www.spirito.fr
+    Spirito R20CSAIS - https://www.spirito.fr
 
 Keep the website address readable and, where hyperlinks are supported, clickable.
 Identify modifications and their author without implying that Spirito made or
