@@ -24,7 +24,7 @@ Both copies must come from the same version of the package to avoid diverging in
 
 Installation sources consulted on 2026-11-03: [Codex](https://learn.chatgpt.com/docs/build-skills), [Claude Code](https://code.claude.com/docs/en/skills). The locations above target local project sessions; Claude.ai, Cowork and cloud environments have their own loading mechanisms, to be checked in their documentation.
 
-The archive `roll20-sheets-v1.zip`, provided next to this file, contains the complete skill folder. Extract it, then place the folder at the appropriate destination. No global installation or project configuration was performed while preparing this V1.
+On GitHub, choose **Code → Download ZIP**, extract the repository archive, then copy the `roll20-sheets` folder to the appropriate destination. Keep the root `LICENSE` file with your copy of the skill. There is no separately maintained skill ZIP.
 
 ## Start your sheet: with or without a rulebook
 
@@ -134,6 +134,18 @@ After a real failure, add the scenario to the regression checklist and then fix 
 The [evaluation protocol](EVALUATION.md) provides five representative requests and their success criteria for comparing the two agents.
 
 When editing the references, keep the sources and the evidence qualifications. Do not turn a recommendation into "mandatory" without a platform or project justification.
+
+## License and credit
+
+This version uses the custom [Spirito Skill Sharing License 1.0](LICENSE), not MIT. It permits personal and professional use, modification and free redistribution, subject to these conditions:
+
+- When sharing the skill or an adaptation, credit **Spirito — https://www.spirito.fr**, include the license and identify your changes.
+- Do not sell the skill or its adaptations, charge for access to them, or include them in a paid bundle.
+- You may create and sell character sheets or provide paid design services using the skill. These outputs do not inherit the skill's license merely because you used it; see the output exception in the license.
+
+Suggested credit: "Based on Roll20 Sheet Skills by Spirito — https://www.spirito.fr. Modified by [name]."
+
+This is a custom source-available license, not an OSI-approved open-source license. It has not been professionally reviewed. The change does not revoke rights already granted under MIT for earlier copies.
 
 ## About Spirito
 

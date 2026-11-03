@@ -1,21 +1,66 @@
-MIT License
+Spirito Skill Sharing License 1.0
 
-Copyright (c) 2026 Spirito35
+Copyright (c) 2026 Spirito (Spirito35)
+https://www.spirito.fr
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Scope
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+"Material" means the original instructions, documentation, examples and software
+in this repository distributed with this license. "Adaptations" means modified,
+translated or otherwise adapted versions of the Material. Third-party works
+remain subject to their own terms. This license grants only rights the licensor
+is entitled to grant and does not restrict statutory exceptions or limitations.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. Permission
+
+You may use, copy and modify the Material for personal or professional purposes,
+including commercial work. You may redistribute the Material and Adaptations
+free of charge, subject to sections 3 and 4. Recipients receive these permissions
+directly under this license. You may not remove these conditions from the
+Material or Adaptations when redistributing them.
+
+3. Attribution on redistribution
+
+When sharing the Material or Adaptations, retain this license and the copyright
+notice, and provide this credit in an accompanying README, credits page or
+similarly reasonably visible location:
+
+    Roll20 Sheet Skills by Spirito - https://www.spirito.fr
+
+Keep the website address readable and, where hyperlinks are supported, clickable.
+Identify modifications and their author without implying that Spirito made or
+endorsed them. Private use does not require a public credit.
+
+4. No sale of the Material or Adaptations
+
+You may not sell, rent, sublicense for a fee, or charge for access to the Material
+or Adaptations, whether separately, behind a subscription or paywall, or as part
+of a paid bundle. Making cosmetic changes or translating the Material does not
+remove this restriction. Voluntary donations are allowed only when access and
+the permissions granted here are not conditional on payment.
+
+5. Character sheets, outputs and services
+
+You may charge for character sheets and other outputs you create using the
+Material, and for design, consulting or other services that use it. Merely using
+the Material does not place your outputs under this license and does not require
+you to credit Spirito in those outputs.
+
+You may incorporate and adapt implementation code examples from the Material
+into character sheets you create and distribute those sheets under your chosen
+terms, including for payment, without the attribution and no-sale requirements
+of sections 3 and 4. This exception does not cover repackaging the skill,
+reference documents, or standalone checking scripts as an output for sale.
+
+6. Warranty and liability
+
+To the extent permitted by applicable law, the Material is provided as is,
+without warranties of any kind. The licensor is not liable for claims, damages
+or other liability arising from the Material or its use. Nothing here excludes
+liability that cannot lawfully be excluded.
+
+7. Earlier licenses and separate permission
+
+This license does not revoke permissions previously granted for earlier copies
+under another license. Uses outside these permissions require separate permission
+from Spirito, who can be contacted through https://www.spirito.fr.
