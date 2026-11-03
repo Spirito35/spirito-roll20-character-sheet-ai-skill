@@ -14,15 +14,17 @@ A *skill* is a folder of instructions that helps your AI assistant work with Rol
 | Codex by OpenAI | Follow the [VS Code setup](https://learn.chatgpt.com/docs/codex/ide). You need an account with access to Codex; availability and usage limits depend on your plan or API billing. Check [current access and pricing](https://learn.chatgpt.com/docs/pricing). |
 | Claude Code by Anthropic | Follow the [VS Code setup](https://code.claude.com/docs/en/vs-code). Use an eligible paid Claude subscription, such as Pro, or a Claude Console account with usage billing. |
 
-- **Roll20 Pro access** for the [Custom Sheet Sandbox](https://bloghub.roll20.net/posts/new-pro-feature-custom-sheet-sandbox/), where you can load and test your own sheet. This is separate from your AI account.
+- **Optional: Roll20 Pro access** for the [Custom Sheet Sandbox](https://bloghub.roll20.net/posts/new-pro-feature-custom-sheet-sandbox/), where you can load and test your own sheet directly in Roll20. This is separate from your AI account. It is the best way to check your work, but not required: without it, the assistant can still create new sheets and edit the HTML/CSS code you give it, and you can test the files later.
 
-The skill itself is free to use. You only need one assistant. Python 3.10+ is optional, for the included checking script; no package manager or terminal installation is needed for the skill.
+The skill itself is free to use. You only need one assistant. The skill is a plain folder of Markdown instructions, so other AI coding assistants may be able to use it too, but it has only been prepared for Codex and Claude Code. Python 3.10+ is optional, for the included checking script; no package manager or terminal installation is needed for the skill.
 
 *Account requirements checked on 3 November 2026; follow the linked setup pages for current details.*
 
 ## 2. Install the skill
 
-1. Download this repository using **Code > Download ZIP**, then extract it. If a version is available under [Releases](https://github.com/Spirito35/roll20-sheet-skills/releases), you can download its **Source code (zip)** instead.
+**[Download the skill (ZIP)](https://github.com/Spirito35/roll20-sheet-skills/archive/refs/heads/main.zip)**
+
+1. Extract the downloaded ZIP. You can also use **Code > Download ZIP** on GitHub, or, if a version is available under [Releases](https://github.com/Spirito35/roll20-sheet-skills/releases), its **Source code (zip)**.
 2. Create a folder for your sheet, for example `my-roll20-sheet`. In VS Code, choose **File > Open Folder** and open it.
 3. Inside that project, create the folders below and copy the **whole** downloaded `roll20-sheets` folder into the location for your assistant:
 
@@ -59,6 +61,8 @@ For an existing sheet, place its files in the project and describe the change yo
 
 ## 4. See the result in Roll20
 
+This step needs Roll20 Pro. Without it, you can keep working on the HTML/CSS files with your assistant and test them later.
+
 Ask the assistant which HTML and CSS files to load into your [Sheet Sandbox](https://app.roll20.net/sheetsandbox). Open a character there to check the appearance, buttons and calculations.
 
 We recommend the optional **[Roll20 Autouploader](https://wiki.roll20.net/Roll20_Autouploader)**: it sends your local files to the sandbox when you save, making visual checks faster. [Install the extension](https://chromewebstore.google.com/detail/roll20-api-and-sheet-auto/hboggmcfmaakkifgifjbccnpfmnegick), open your sandbox and select the sheet folder to monitor. Check browser compatibility; manual uploads also work.
@@ -82,7 +86,7 @@ Like many creatives, my work has been affected by AI. It's here, and we have to 
 Under the custom [Spirito Skill Sharing License](LICENSE):
 
 - Use and adapt the skill, including to create **paid character sheets**.
-- Share it for free, preserving the license and the credit **Spirito - https://www.spirito.fr**, and identify your changes.
+- Share it for free, preserving the license and the credit **Roll20 Sheet Skills by Spirito - https://www.spirito.fr**, and identify your changes.
 - **Do not sell the skill or its adaptations**, or charge for access to them.
 
 This custom license has not been professionally reviewed and is not an OSI-approved open-source license. Earlier copies distributed under MIT retain their previously granted permissions.
