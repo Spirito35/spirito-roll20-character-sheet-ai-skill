@@ -1,179 +1,90 @@
-# Roll20 Sheets — first shareable package
+# Roll20 Sheet Skills
 
-Working version: 2026-11-03. Language of the instructions: English. The same skill folder works with Codex and Claude Code; it contains Markdown instructions and an optional Python tool with no external dependencies.
+Create or improve a Roll20 character sheet with help from **Codex or Claude Code**.
 
-## What it contains
+A *skill* is a folder of instructions that helps your AI assistant work with Roll20. You describe the sheet you want; the assistant helps write its files. You do not need to read the technical references or fill out a form first.
 
-- [SKILL.md](roll20-sheets/SKILL.md): short entry point, choice of references and invariants.
-- Topic references, linked from the entry point. Each topic says when to read it and which checks to select.
-- [check_sheet.py](roll20-sheets/scripts/check_sheet.py): read-only static checker, Python 3.10+.
-- [Source catalog](roll20-sheets/references/sources.md): official links, consultation date and coverage limits.
+## 1. What you need
 
-The package works without Spirito's sheets, backups or paths. Examples are short and adaptable; project-specific details stay outside this public folder. Shared delivery conventions are identified explicitly. It is not affiliated with Roll20 and does not reproduce a complete official manual.
+- **[Visual Studio Code](https://code.visualstudio.com/)** (VS Code), installed on your computer.
+- **One AI assistant**, installed in VS Code and signed in. Choose either:
 
-## Installing in a project
-
-Copy the **whole** `roll20-sheets` folder, not just `SKILL.md`, to the desired location:
-
-| Tool | Destination in the project |
+| Assistant | Setup and account |
 | --- | --- |
-| Codex | `.agents/skills/roll20-sheets/` |
-| Claude Code | `.claude/skills/roll20-sheets/` |
+| Codex by OpenAI | Follow the [VS Code setup](https://learn.chatgpt.com/docs/codex/ide). You need an account with access to Codex; availability and usage limits depend on your plan or API billing. Check [current access and pricing](https://learn.chatgpt.com/docs/pricing). |
+| Claude Code by Anthropic | Follow the [VS Code setup](https://code.claude.com/docs/en/vs-code). Use an eligible paid Claude subscription, such as Pro, or a Claude Console account with usage billing. |
 
-Both copies must come from the same version of the package to avoid diverging instructions. Keep this folder as the editable source and re-copy the full folder on update. Do not install several copies of the same skill in the same tool without a reason.
+- **Roll20 Pro access** for the [Custom Sheet Sandbox](https://bloghub.roll20.net/posts/new-pro-feature-custom-sheet-sandbox/), where you can load and test your own sheet. This is separate from your AI account.
 
-Installation sources consulted on 2026-11-03: [Codex](https://learn.chatgpt.com/docs/build-skills), [Claude Code](https://code.claude.com/docs/en/skills). The locations above target local project sessions; Claude.ai, Cowork and cloud environments have their own loading mechanisms, to be checked in their documentation.
+The skill itself is free to use. You only need one assistant. Python 3.10+ is optional, for the included checking script; no package manager or terminal installation is needed for the skill.
 
-On GitHub, choose **Code → Download ZIP**, extract the repository archive, then copy the `roll20-sheets` folder to the appropriate destination. Keep the root `LICENSE` file with your copy of the skill. There is no separately maintained skill ZIP.
+*Account requirements checked on 3 November 2026; follow the linked setup pages for current details.*
 
-## Start your sheet: with or without a rulebook
+## 2. Install the skill
 
-A rulebook is optional. The skill explains how to build a Roll20 sheet; you supply the game rules and the features you want. A book does not mean that every rule must be automated.
+1. Download this repository using **Code > Download ZIP**, then extract it. If a version is available under [Releases](https://github.com/Spirito35/roll20-sheet-skills/releases), you can download its **Source code (zip)** instead.
+2. Create a folder for your sheet, for example `my-roll20-sheet`. In VS Code, choose **File > Open Folder** and open it.
+3. Inside that project, create the folders below and copy the **whole** downloaded `roll20-sheets` folder into the location for your assistant:
 
-Keep project documents outside the installed skill folder so updating the skill does not replace them. Suggested layout, relative to your sheet project's root:
+| Assistant | The installed entry file must be at |
+| --- | --- |
+| Codex | `my-roll20-sheet/.agents/skills/roll20-sheets/SKILL.md` |
+| Claude Code | `my-roll20-sheet/.claude/skills/roll20-sheets/SKILL.md` |
 
-```text
-my-sheet-project/
-  docs/
-    sheet-brief.md
-    rulebooks/          # Optional: your rulebooks and errata
-  sheet.html           # Example output names; existing projects keep theirs
-  sheet.css
-```
+Keep `references/` and `scripts/` alongside `SKILL.md`. Copy the downloaded `LICENSE` into the installed `roll20-sheets` folder too. Folder names beginning with a dot are intentional.
 
-These paths are a convention, not a requirement. If your files are elsewhere, tell the agent their paths. They must be accessible in the agent's workspace; a path on another computer is not enough.
+Open a new assistant session in this project. If the skill is missing, check the path above and restart the extension. Official installation details: [Codex skills](https://learn.chatgpt.com/docs/build-skills), [Claude Code skills](https://code.claude.com/docs/en/skills).
 
-### With a rulebook
+## 3. Describe your sheet
 
-1. Put the relevant PDF, Markdown or text files in `docs/rulebooks/`. Keep books you cannot redistribute out of the public repository and release archives; add `/docs/rulebooks/` to your project's `.gitignore` before committing them. This does not untrack files already committed.
-2. Ask the agent to start your sheet. When it finds a relevant rulebook, it creates and fills in `docs/sheet-brief.md` itself: game, edition, source filenames, relevant chapters or pages, mechanics and proposed first-version features. You do not need to fill out the template first.
-3. The agent asks you about choices the book cannot settle, such as feature priorities, layout and house rules. It reads only the sections needed for the task and records page or section references. If a PDF cannot be read with the available tools, provide a readable excerpt or text export; the agent must flag the gap.
+**With a rulebook:** put your PDF or text files in `docs/rulebooks/` inside the project. Tell the assistant which book and edition to use. Keep books you cannot redistribute out of GitHub; ask the assistant to exclude that folder before publishing.
 
-Example request after activating the skill:
+**Without a rulebook:** list the features you want, such as attributes, skill rolls, health and inventory. The assistant will ask about missing rules.
+
+In the assistant's chat, start with `Use $roll20-sheets` for Codex or `/roll20-sheets` for Claude Code, then add this request:
 
 ```text
-Create a Roll20 sheet from docs/rulebooks/core-rules.pdf.
-Create and fill in docs/sheet-brief.md from the rulebook yourself.
-Start with attributes, skill rolls and health.
-Read only the relevant sections, cite their pages or headings,
-and ask about unresolved rules before automating them.
+Help me create a Roll20 character sheet.
+Check docs/rulebooks/ for a rulebook; if there is none, ask me
+which features and rules I want.
+Create and fill in docs/sheet-brief.md yourself from our discussion
+and the relevant rules. Start with a small first version.
+Ask about missing decisions instead of inventing game rules.
+Explain the next steps in simple language.
 ```
 
-### Without a rulebook
+`docs/sheet-brief.md` is your project's short plan. The assistant maintains it; you can correct it anytime. You can speak your own language even though the skill is written in English.
 
-Describe your feature list in plain language in chat; the agent creates and fills in `docs/sheet-brief.md` from it. You can also write the brief yourself if you prefer. You do not need to know HTML, CSS or the final formulas yet.
+For an existing sheet, place its files in the project and describe the change you want. Keep a backup before substantial edits.
 
-For each feature, say what users enter, what the sheet calculates, which buttons they need and what results they expect. Mark unknown rules as undecided. The agent can build agreed parts and ask focused questions about missing mechanics; it should not silently invent a game's rules.
+## 4. See the result in Roll20
 
-The agent can use this starter for either route, or you can fill it in yourself:
+Ask the assistant which HTML and CSS files to load into your [Sheet Sandbox](https://app.roll20.net/sheetsandbox). Open a character there to check the appearance, buttons and calculations.
 
-```markdown
-# Sheet brief
-- Game and edition, or custom system:
-- Language and sheet type (PC, NPC, vehicle, etc.):
-- Existing sheet files, if any:
-- Rulebook paths and relevant sections, or "No rulebook":
-- Errata and house rules, if any:
+We recommend the optional **[Roll20 Autouploader](https://wiki.roll20.net/Roll20_Autouploader)**: it sends your local files to the sandbox when you save, making visual checks faster. [Install the extension](https://chromewebstore.google.com/detail/roll20-api-and-sheet-auto/hboggmcfmaakkifgifjbccnpfmnegick), open your sandbox and select the sheet folder to monitor. Check browser compatibility; manual uploads also work.
 
-## First-version features
-| Feature | User inputs | Calculation or roll | Expected result |
-| --- | --- | --- | --- |
-| Skill roll | Skill bonus | 1d20 + bonus (example custom rule) | Chat result; bonus 3 and die 10 gives 13 |
-| Health | Current and maximum | Manual tracking | Editing maximum does not refill current health |
+Tell the assistant what you expected and what happened when something fails. AI-generated sheets still need testing in Roll20; a local preview cannot verify all game behavior. This project has not yet been validated through a complete live Roll20 test.
 
-## Layout and automation
-- Sections or tabs wanted:
-- Actions to automate and values to keep manual:
-- Features to leave for later:
+## Updates
 
-## Open questions
-- Rules or behavior still to decide:
-```
+Download the new version and replace the installed `roll20-sheets` folder, including its license. Keep your sheet files and `docs/` separate so they are preserved. You do not need GitHub Packages. Releases identify specific versions; **Code > Download ZIP** gets the current development files.
 
-Replace the example rows with your own rules. With no rulebook, an example request is:
+## About Spirito and support
 
-```text
-Create a Roll20 sheet. I have no rulebook. I want skill rolls,
-manual health tracking and an inventory with a weight total.
-Write docs/sheet-brief.md from this list and ask about missing formulas.
-Keep undecided mechanics manual until we settle their behavior.
-```
+I'm **[Spirito](https://www.spirito.fr)**, a graphic designer and role-playing character sheet creator, with more than a dozen sheets coded myself.
 
-## Activating the skill
+The sheet code used to build this skill came exclusively from my own creations. I did not use other authors' sheet code from the Roll20 community repository because I had not obtained their agreement. The skill also uses linked platform documentation. These are instructions for existing assistants, not an AI model trained exclusively on my work. This project is not affiliated with Roll20, OpenAI or Anthropic.
 
-In Codex:
+Like many creatives, my work has been affected by AI. It's here, and we have to work with it. If this skill helps you, you can **[say thanks with a voluntary donation](https://www.paypal.com/paypalme/spirito35)**. Donations support my work and are never required.
 
-```text
-Use $roll20-sheets to fix the weight total after deleting
-the last inventory row in the indicated files.
-```
+## License
 
-In Claude Code:
+Under the custom [Spirito Skill Sharing License](LICENSE):
 
-```text
-/roll20-sheets Fix the weight total after deleting the last
-inventory row in the indicated files.
-```
+- Use and adapt the skill, including to create **paid character sheets**.
+- Share it for free, preserving the license and the credit **Spirito - https://www.spirito.fr**, and identify your changes.
+- **Do not sell the skill or its adaptations**, or charge for access to them.
 
-The name and description also allow automatic selection depending on the environment. If the skill does not appear, check the destination and the reloading of skills in the version of the tool in use.
+This custom license has not been professionally reviewed and is not an OSI-approved open-source license. Earlier copies distributed under MIT retain their previously granted permissions.
 
-By default, the skill introduces no comments, non-ASCII characters or emojis into delivered CSS, including roll-template styles and escaped emojis. This is a delivery convention based on Spirito's experience, not a universal Roll20 restriction. Explicit project instructions and documented exceptions take precedence; existing sheets are not automatically cleaned up. See the [full convention and checks](roll20-sheets/references/css-assets.md#delivered-css-convention).
-
-## Preview changes in Roll20
-
-For a faster edit-and-preview workflow, we recommend installing the optional **Roll20 API and Sheet Autouploader** browser extension. It uploads your HTML, CSS and translation files to a Roll20 Sheet Sandbox as you save changes, reducing manual uploads so you can inspect the actual sheet rendering while you work.
-
-- [Roll20 Autouploader guide](https://wiki.roll20.net/Roll20_Autouploader)
-- [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/roll20-api-and-sheet-auto/hboggmcfmaakkifgifjbccnpfmnegick)
-
-With access to a Roll20 Sheet Sandbox:
-
-1. Install the extension in a supported Chromium browser.
-2. Open your Sheet Sandbox and select the local sheet directory for the extension to monitor. If your project has a build step, select the generated output directory.
-3. Save a change, check that the upload completes, then inspect a character sheet in the sandbox. Refresh or reopen it if needed.
-
-The extension's listing notes browser compatibility limitations, including Brave; check the linked instructions for your browser. The extension is optional: manual uploads remain possible. Seeing the updated layout does not replace testing rolls, workers and character data.
-
-## Scope and limits
-
-V1 mainly covers CSE HTML/CSS creation and maintenance, plus Legacy particularities. It covers the usual decisions around data, workers, repeating sections, CSS, rolls, templates, resources, import/export, translation and validation. Beacon, Charactermancer and Mod/API have dedicated orientation and sources; they are not treated as equivalent to the CSE architecture.
-
-The rules were restructured from Spirito's two guides and cross-checked on targeted points against the listed sources. No access to a Roll20 game was used to validate this V1. The script does not certify a worker, a rendering or a game rule.
-
-## Keeping it efficient
-
-Do not ask the model to read every Markdown file at startup. Let it choose references according to the change. Keep each rule in a single place, incident histories in the project, and long documentation behind targeted links.
-
-After a real failure, add the scenario to the regression checklist and then fix the instruction responsible. Measure the content actually read and the result obtained on comparable tasks. File length is only an indicator; on its own it measures neither the tokens consumed nor the quality.
-
-The [evaluation protocol](EVALUATION.md) provides five representative requests and their success criteria for comparing the two agents.
-
-When editing the references, keep the sources and the evidence qualifications. Do not turn a recommendation into "mandatory" without a platform or project justification.
-
-## License and credit
-
-This version uses the custom [Spirito Skill Sharing License 1.0](LICENSE), not MIT. It permits personal and professional use, modification and free redistribution, subject to these conditions:
-
-- When sharing the skill or an adaptation, credit **Spirito — https://www.spirito.fr**, include the license and identify your changes.
-- Do not sell the skill or its adaptations, charge for access to them, or include them in a paid bundle.
-- You may create and sell character sheets or provide paid design services using the skill. These outputs do not inherit the skill's license merely because you used it; see the output exception in the license.
-
-Suggested credit: "Based on Roll20 Sheet Skills by Spirito — https://www.spirito.fr. Modified by [name]."
-
-This is a custom source-available license, not an OSI-approved open-source license. It has not been professionally reviewed. The change does not revoke rights already granted under MIT for earlier copies.
-
-## About Spirito
-
-I'm [Spirito](https://www.spirito.fr), a graphic designer and tabletop role-playing character sheet creator. I have coded more than a dozen sheets myself, and this project grew out of that work.
-
-The sheet code used to develop this skill came exclusively from my own creations. I chose not to use other authors' sheet code from the Roll20 community repository because I had not obtained their agreement to use their work for this project. The skill also draws on the platform documentation linked in its source catalog; links to repository guidance are documentation references, not a corpus of other creators' sheets.
-
-This is a set of instructions and references for existing AI assistants, not an AI model trained exclusively on my sheets. The provenance described here concerns this skill, not the training data of the models that use it.
-
-## Support my work
-
-Like many creatives, my work has been affected by the arrival of AI. It's here, and we have to find a way to work with it. Sharing this skill is one way I'm putting my experience to use.
-
-If this project helps you and you'd like to say thanks, you can [make a voluntary donation through PayPal](https://www.paypal.com/paypalme/spirito35). Donations support my work as a designer and sheet creator; they are not required to use the skill.
-
-You can also find me and my work at [www.spirito.fr](https://www.spirito.fr).
+The other files are primarily for the assistant: [skill instructions](roll20-sheets/SKILL.md), [technical sources](roll20-sheets/references/sources.md) and [evaluation scenarios](EVALUATION.md).
