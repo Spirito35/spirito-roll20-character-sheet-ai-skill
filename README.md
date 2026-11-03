@@ -1,4 +1,4 @@
-# Roll20 Sheet Skills
+﻿# Spirito R20CharSheet Skill
 
 Create or improve a Roll20 character sheet with help from **Codex or Claude Code**.
 
@@ -22,9 +22,9 @@ The skill itself is free to use. You only need one assistant. The skill is a pla
 
 ## 2. Install the skill
 
-**[Download the skill (ZIP)](https://github.com/Spirito35/roll20-sheet-skills/archive/refs/heads/main.zip)**
+**[Download the skill (ZIP)](https://github.com/Spirito35/spirito-r20charsheet-skill/archive/refs/heads/main.zip)**
 
-1. Extract the downloaded ZIP. You can also use **Code > Download ZIP** on GitHub, or, if a version is available under [Releases](https://github.com/Spirito35/roll20-sheet-skills/releases), its **Source code (zip)**.
+1. Extract the downloaded ZIP. You can also use **Code > Download ZIP** on GitHub, or, if a version is available under [Releases](https://github.com/Spirito35/spirito-r20charsheet-skill/releases), its **Source code (zip)**.
 2. Create a folder for your sheet, for example `my-roll20-sheet`. In VS Code, choose **File > Open Folder** and open it.
 3. Inside that project, create the folders below and copy the **whole** downloaded `roll20-sheets` folder into the location for your assistant:
 
@@ -86,7 +86,7 @@ Like many creatives, my work has been affected by AI. It's here, and we have to 
 Under the custom [Spirito Skill Sharing License](LICENSE):
 
 - Use and adapt the skill, including to create **paid character sheets**.
-- Share it for free, preserving the license and the credit **Roll20 Sheet Skills by Spirito - https://www.spirito.fr**, and identify your changes.
+- Share it for free, preserving the license and the credit **Spirito R20CharSheet Skill - https://www.spirito.fr**, and identify your changes.
 - **Do not sell the skill or its adaptations**, or charge for access to them.
 
 This custom license has not been professionally reviewed and is not an OSI-approved open-source license. Earlier copies distributed under MIT retain their previously granted permissions.
