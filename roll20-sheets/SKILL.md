@@ -9,6 +9,8 @@ Work on the requested need, preserving character data and game rules. This skill
 
 ## Getting started
 
+For a new sheet or unclear requirements, read [project-brief.md](references/project-brief.md): work from an optional rulebook or a user-defined feature list. For a focused fix, use the existing requirements without restarting onboarding.
+
 1. Identify the files actually in use: sources or build outputs, HTML/CSS, `sheet.json` and any translations. Set aside backups and unrelated variants.
 2. Determine the engine: CSE, Legacy or Beacon. If the repository is not enough, state the uncertainty and check the setting actually loaded before making any mode-dependent decision.
 3. Locate the attributes, events, macros and selectors involved with targeted searches. Read their producers and consumers, not every sheet in the repository.
