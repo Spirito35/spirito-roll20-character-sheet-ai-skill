@@ -91,4 +91,4 @@ Under the custom [Spirito Skill Sharing License](LICENSE):
 
 This custom license has not been professionally reviewed and is not an OSI-approved open-source license. Earlier copies distributed under MIT retain their previously granted permissions.
 
-The other files are primarily for the assistant: [skill instructions](roll20-sheets/SKILL.md), [technical sources](roll20-sheets/references/sources.md) and [evaluation scenarios](EVALUATION.md).
+See the [changelog](CHANGELOG.md) for additions and changes. The other files are primarily for the assistant: [skill instructions](roll20-sheets/SKILL.md), [technical sources](roll20-sheets/references/sources.md) and [evaluation scenarios](EVALUATION.md).
