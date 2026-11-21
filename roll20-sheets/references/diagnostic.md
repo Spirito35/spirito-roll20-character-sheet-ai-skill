@@ -29,6 +29,10 @@ Start with the files actually loaded, their mode, the expected scenario and the 
 | Overflow / broken popout | Intrinsic minimum, selector ancestors | [CSS](css-assets.md) |
 | Icon displayed as plain text | Font loading and ligatures | [CSS](css-assets.md) |
 | Different chat theme | Variables and classes of the chat context | [templates](roll-templates.md) |
+| Chat card renders but no template style applies | Backslash escapes in CSS `content`; bisect with a minimal template | [pitfalls](roll20-pitfalls.md) |
+| All sheet CSS stops after a scripted edit | Brace balance, orphan selector lines, line endings | [pitfalls](roll20-pitfalls.md) |
+| Dice glyph, black focus outline or extra margins on buttons and inputs | Roll20 default styles to reset | [pitfalls](roll20-pitfalls.md) |
+| Radio, checkbox or tab will not click or collapses to a sliver | Overlay tricks, `appearance: none`, clickable area | [pitfalls](roll20-pitfalls.md) |
 | Translation key displayed | JSON loaded, exact key, dynamic key | [i18n](i18n-accessibility.md) |
 | Unreadable accents in the terminal | Decode UTF-8 before concluding corruption | [validation](validation.md) |
 

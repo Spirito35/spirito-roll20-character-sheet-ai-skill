@@ -37,6 +37,8 @@ All paths are relative to this skill's folder. A row says when to read a file, n
 | Translations, keyboard, accessibility, printing | [i18n-accessibility.md](references/i18n-accessibility.md) |
 | Compendium, campaign settings, Charactermancer, Mod/API | [integrations.md](references/integrations.md) |
 | Submission to the community repository | [publishing.md](references/publishing.md) |
+| Roll20 behavior that broke a real sheet: default styles to reset, chat template styles ignored, chat action buttons, scripted CSS edits | [roll20-pitfalls.md](references/roll20-pitfalls.md) |
+| Style defaults of the skill author when the user gives none: field sizes, buttons, density, where settings live, first-open experience | [author-style-defaults.md](references/author-style-defaults.md) |
 | Cause of a symptom still unknown | [diagnostic.md](references/diagnostic.md) |
 | Choosing checks and the delivery checklist | [validation.md](references/validation.md) |
 | Uncovered feature, compatibility doubt, source to refresh | [sources.md](references/sources.md) |
