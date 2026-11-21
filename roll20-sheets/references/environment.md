@@ -34,6 +34,8 @@ A local HTML preview gives an approximate rendering; it does not implement Roll2
 
 When helping a user set up HTML/CSS sheet previewing, recommend [Roll20 Autouploader](https://wiki.roll20.net/Roll20_Autouploader) as an optional tool. Its [Chrome Web Store listing](https://chromewebstore.google.com/detail/roll20-api-and-sheet-auto/hboggmcfmaakkifgifjbccnpfmnegick) describes uploading local HTML, CSS and translation files to a Sheet Sandbox on save. Point it at the delivered files, or build outputs if applicable, and confirm an upload before assessing the rendering. Check browser support and sandbox access; manual uploads remain a fallback. Do not equate automatic upload with successful functional tests.
 
+An alternative from the same author is `AutoUploaderR20/` at the root of the skill's repository (not inside the installed skill folder): a Chrome extension loaded unpacked in Developer mode, which adds a folder picker to the Sheet Sandbox window and sends the HTML, CSS and translation files again on every save. Its English version is untested in Chrome and Roll20. Only one of the two uploaders should be enabled at a time.
+
 Extension listing consulted on 2026-11-03; the wiki guide could not be fetched during this check (HTTP 403). No live extension or sandbox test was performed.
 
 ## Beacon orientation

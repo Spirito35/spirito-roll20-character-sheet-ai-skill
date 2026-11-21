@@ -2,6 +2,15 @@
 
 Additions and changes to Spirito Roll20 Character Sheet AI Skill (R20CSAIS), newest first.
 
+## 2026-11-21 - AutoUploaderR20
+
+Added:
+- `AutoUploaderR20/`: Chrome extension (v1.4.0) that adds a folder picker to Roll20's Sheet Sandbox window and sends the sheet's HTML, CSS and translation files again on every save. English translation of the author's working French version; the logic is unchanged. The English version is not yet tested in Chrome or Roll20.
+
+Changed:
+- `README.md`: section 4 mentions AutoUploaderR20 next to the official Roll20 Autouploader, and links to this changelog.
+- `roll20-sheets/references/environment.md`: the optional uploads paragraph mentions AutoUploaderR20.
+
 ## 2026-11-21 - First learnings from a real sheet build
 
 Source: feedback and failures recorded while building the Daggerheart sheet (2026-11-10 to 2026-11-20), tested in Roll20.

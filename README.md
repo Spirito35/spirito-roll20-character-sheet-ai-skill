@@ -67,6 +67,8 @@ Ask the assistant which HTML and CSS files to load into your [Sheet Sandbox](htt
 
 We recommend the optional **[Roll20 Autouploader](https://wiki.roll20.net/Roll20_Autouploader)**: it sends your local files to the sandbox when you save, making visual checks faster. [Install the extension](https://chromewebstore.google.com/detail/roll20-api-and-sheet-auto/hboggmcfmaakkifgifjbccnpfmnegick), open your sandbox and select the sheet folder to monitor. Check browser compatibility; manual uploads also work.
 
+This repository also includes **[AutoUploaderR20](AutoUploaderR20/README.md)**, a small Chrome extension made by Spirito that does the same job from a folder picker inside the Sheet Sandbox window. It is optional, installed by hand through Chrome's Developer mode, and not yet tested in its English version. Do not run it together with the official Autouploader.
+
 Tell the assistant what you expected and what happened when something fails. AI-generated sheets still need testing in Roll20; a local preview cannot verify all game behavior. This project has not yet been validated through a complete live Roll20 test.
 
 ## Updates

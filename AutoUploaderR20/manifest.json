@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "AutoUploaderR20",
+  "short_name": "AutoUploaderR20",
+  "version": "1.4.0",
+  "description": "Adds a block to Roll20's Sheet Sandbox window to pick a folder: the extension finds the HTML and CSS, uploads them, and uploads them again on every save.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.roll20.net/editor*",
+        "https://app.roll20staging.net/editor*"
+      ],
+      "js": [
+        "bridge.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://app.roll20.net/editor*",
+        "https://app.roll20staging.net/editor*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
