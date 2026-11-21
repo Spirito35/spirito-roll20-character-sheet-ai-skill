@@ -5,7 +5,7 @@ Additions and changes to Spirito Roll20 Character Sheet AI Skill (R20CSAIS), new
 ## 2026-11-21 - AutoUploaderR20
 
 Added:
-- `AutoUploaderR20/`: Chrome extension (v1.4.0) that adds a folder picker to Roll20's Sheet Sandbox window and sends the sheet's HTML, CSS and translation files again on every save. English translation of the author's working French version; the logic is unchanged. The English version is not yet tested in Chrome or Roll20.
+- `AutoUploaderR20/`: Chrome extension (v1.4.0) that adds a folder picker to Roll20's Sheet Sandbox window and sends the sheet's HTML, CSS and translation files again on every save. English translation of the author's working French version; the logic is unchanged. The English version is not yet tested in Chrome or Roll20. Icons use the Spirito favicon on a dark background.
 
 Changed:
 - `README.md`: section 4 mentions AutoUploaderR20 next to the official Roll20 Autouploader, and links to this changelog.
